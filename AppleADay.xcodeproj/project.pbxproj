@@ -15,6 +15,15 @@
 		114B788A1FA4E1590086BF81 /* granat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 114B78871FA4E1580086BF81 /* granat.jpg */; };
 		114B788B1FA4E1590086BF81 /* coffee.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 114B78881FA4E1590086BF81 /* coffee.jpg */; };
 		114B788C1FA4E1590086BF81 /* apple.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 114B78891FA4E1590086BF81 /* apple.jpg */; };
+		11F6DD131FC827E300E6CE75 /* sex.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD0B1FC827E300E6CE75 /* sex.png */; };
+		11F6DD141FC827E300E6CE75 /* stairs-climbing.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD0C1FC827E300E6CE75 /* stairs-climbing.png */; };
+		11F6DD151FC827E300E6CE75 /* hand-stand.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD0D1FC827E300E6CE75 /* hand-stand.png */; };
+		11F6DD161FC827E300E6CE75 /* sit-ups.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD0E1FC827E300E6CE75 /* sit-ups.png */; };
+		11F6DD171FC827E300E6CE75 /* push-ups.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD0F1FC827E300E6CE75 /* push-ups.png */; };
+		11F6DD181FC827E300E6CE75 /* swimming.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD101FC827E300E6CE75 /* swimming.png */; };
+		11F6DD191FC827E300E6CE75 /* press.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD111FC827E300E6CE75 /* press.png */; };
+		11F6DD1A1FC827E300E6CE75 /* rope-jumping.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD121FC827E300E6CE75 /* rope-jumping.png */; };
+		11F6DD1D1FC827FA00E6CE75 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD1C1FC827FA00E6CE75 /* circle.png */; };
 		2C2009231E257304000E1A49 /* pill.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2009221E257304000E1A49 /* pill.png */; };
 		2C8F402B1E1546CE003E9964 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F402A1E1546CE003E9964 /* AppDelegate.swift */; };
 		2C8F402D1E1546CE003E9964 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F402C1E1546CE003E9964 /* ViewController.swift */; };
@@ -43,6 +52,15 @@
 		114B78871FA4E1580086BF81 /* granat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = granat.jpg; path = assets/granat.jpg; sourceTree = SOURCE_ROOT; };
 		114B78881FA4E1590086BF81 /* coffee.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = coffee.jpg; path = assets/coffee.jpg; sourceTree = SOURCE_ROOT; };
 		114B78891FA4E1590086BF81 /* apple.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = apple.jpg; path = assets/apple.jpg; sourceTree = SOURCE_ROOT; };
+		11F6DD0B1FC827E300E6CE75 /* sex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sex.png; path = "assets/activity-icons/sex.png"; sourceTree = SOURCE_ROOT; };
+		11F6DD0C1FC827E300E6CE75 /* stairs-climbing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stairs-climbing.png"; path = "assets/activity-icons/stairs-climbing.png"; sourceTree = SOURCE_ROOT; };
+		11F6DD0D1FC827E300E6CE75 /* hand-stand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hand-stand.png"; path = "assets/activity-icons/hand-stand.png"; sourceTree = SOURCE_ROOT; };
+		11F6DD0E1FC827E300E6CE75 /* sit-ups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sit-ups.png"; path = "assets/activity-icons/sit-ups.png"; sourceTree = SOURCE_ROOT; };
+		11F6DD0F1FC827E300E6CE75 /* push-ups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "push-ups.png"; path = "assets/activity-icons/push-ups.png"; sourceTree = SOURCE_ROOT; };
+		11F6DD101FC827E300E6CE75 /* swimming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = swimming.png; path = "assets/activity-icons/swimming.png"; sourceTree = SOURCE_ROOT; };
+		11F6DD111FC827E300E6CE75 /* press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = press.png; path = "assets/activity-icons/press.png"; sourceTree = SOURCE_ROOT; };
+		11F6DD121FC827E300E6CE75 /* rope-jumping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rope-jumping.png"; path = "assets/activity-icons/rope-jumping.png"; sourceTree = SOURCE_ROOT; };
+		11F6DD1C1FC827FA00E6CE75 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		2C2009221E257304000E1A49 /* pill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pill.png; path = ../assets/pill.png; sourceTree = "<group>"; };
 		2C8F40251E1546CE003E9964 /* AppleADay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleADay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C8F40291E1546CE003E9964 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,6 +100,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		11F6DD0A1FC827CC00E6CE75 /* activity-icons */ = {
+			isa = PBXGroup;
+			children = (
+				11F6DD0D1FC827E300E6CE75 /* hand-stand.png */,
+				11F6DD111FC827E300E6CE75 /* press.png */,
+				11F6DD0F1FC827E300E6CE75 /* push-ups.png */,
+				11F6DD121FC827E300E6CE75 /* rope-jumping.png */,
+				11F6DD0B1FC827E300E6CE75 /* sex.png */,
+				11F6DD0E1FC827E300E6CE75 /* sit-ups.png */,
+				11F6DD0C1FC827E300E6CE75 /* stairs-climbing.png */,
+				11F6DD101FC827E300E6CE75 /* swimming.png */,
+			);
+			path = "activity-icons";
+			sourceTree = "<group>";
+		};
+		11F6DD1B1FC827FA00E6CE75 /* design */ = {
+			isa = PBXGroup;
+			children = (
+				11F6DD1C1FC827FA00E6CE75 /* circle.png */,
+			);
+			name = design;
+			path = assets/design;
+			sourceTree = SOURCE_ROOT;
+		};
 		2C8F401C1E1546CE003E9964 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +160,8 @@
 		2C8F40281E1546CE003E9964 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				11F6DD1B1FC827FA00E6CE75 /* design */,
+				11F6DD0A1FC827CC00E6CE75 /* activity-icons */,
 				114B78891FA4E1590086BF81 /* apple.jpg */,
 				114B78881FA4E1590086BF81 /* coffee.jpg */,
 				114B78871FA4E1580086BF81 /* granat.jpg */,
@@ -236,16 +280,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11F6DD171FC827E300E6CE75 /* push-ups.png in Resources */,
+				11F6DD151FC827E300E6CE75 /* hand-stand.png in Resources */,
+				11F6DD1A1FC827E300E6CE75 /* rope-jumping.png in Resources */,
 				114B788B1FA4E1590086BF81 /* coffee.jpg in Resources */,
 				2C2009231E257304000E1A49 /* pill.png in Resources */,
 				114B788C1FA4E1590086BF81 /* apple.jpg in Resources */,
+				11F6DD131FC827E300E6CE75 /* sex.png in Resources */,
 				114B78841FA4D78A0086BF81 /* Images.xcassets in Resources */,
+				11F6DD1D1FC827FA00E6CE75 /* circle.png in Resources */,
 				1129EBDF1FC30B02007B5408 /* multi-vitamin.jpg in Resources */,
+				11F6DD161FC827E300E6CE75 /* sit-ups.png in Resources */,
 				2C8F40301E1546CE003E9964 /* Main.storyboard in Resources */,
+				11F6DD181FC827E300E6CE75 /* swimming.png in Resources */,
 				114B78861FA4DE0D0086BF81 /* mug.jpg in Resources */,
 				114B788A1FA4E1590086BF81 /* granat.jpg in Resources */,
 				2C8F40351E1546CE003E9964 /* LaunchScreen.xib in Resources */,
+				11F6DD141FC827E300E6CE75 /* stairs-climbing.png in Resources */,
 				1129EBE11FC31089007B5408 /* weider-protein-80-plus.jpg in Resources */,
+				11F6DD191FC827E300E6CE75 /* press.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

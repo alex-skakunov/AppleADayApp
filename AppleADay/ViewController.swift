@@ -41,8 +41,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
             saveMultiVitaminMuscleTech()
         case "weiderProtein":
             saveWeiderProtein()
+
+        case "hand-stand":
+            saveHandStand()
+        case "press":
+            savePress()
+        case "push-ups":
+            savePushUps()
+        case "rope-jumping":
+            saveRopeJumping()
+        case "sex":
+            saveSex()
+        case "sit-ups":
+            saveSitUps()
+        case "stairs-climbing":
+            saveStairsClimbing()
+        case "swimming":
+            saveSwimming()
+
         default:
-            savePill()
+            savePill() //"Супрадин"
         }
         
         Alert(title: "Success",
@@ -54,6 +72,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if HKHealthStore.isHealthDataAvailable() {
             // State the health data type(s) we want to write from HealthKit.
             let healthDataToWrite = Set(arrayLiteral:
+                
+                HKCategoryType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sexualActivity)!,
+                
                 HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatTotal)!,
                 HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatSaturated)!,
                 HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatPolyunsaturated)!,
@@ -63,6 +84,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFiber)!,
 
                 HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryEnergyConsumed)!,
+                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!,
                 HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietarySodium)!,
                 HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryPotassium)!,
                 HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCarbohydrates)!,
@@ -243,7 +265,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
 
     
-    func saveWeiderProtein() -> Void {        
+    func saveWeiderProtein() -> Void {
         let list = [
             [HKQuantityTypeIdentifier.dietaryEnergyConsumed, 110.0, "kcal"],
             [HKQuantityTypeIdentifier.dietaryFatTotal, 0.5, "g"],
@@ -257,6 +279,54 @@ class ViewController: UIViewController, UITextFieldDelegate {
         processData(list)
     }
     
+    func saveHandStand() -> Void {
+    }
+
+    func savePress() -> Void {
+    }
+    
+    func savePushUps() -> Void {
+    }
+    
+    func saveRopeJumping() -> Void {
+    }
+    
+    func saveSex() -> Void {
+        let sexualActivity = HKCategoryType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sexualActivity)
+        let metadata: [String: String]? = [HKMetadataKeySexualActivityProtectionUsed: "NO"]
+
+        let endTime = NSDate()
+        
+        let sexSample = HKCategorySample(
+            type: sexualActivity!,
+            value: HKCategoryValue.notApplicable.rawValue,
+            start: endTime.addingTimeInterval(-600) as Date,
+            end: endTime as Date,
+            metadata: metadata
+        )
+
+        healthStore.save(sexSample, withCompletion: { (success, error) -> Void in
+            if( error != nil ) {
+                print(error ?? "error!")
+            }
+        })
+
+        let list = [
+            [HKQuantityTypeIdentifier.activeEnergyBurned, 42.0, "kcal"], //252 kcal/hour
+            ]
+        processData(list)
+    }
+    
+    func saveSitUps() -> Void {
+    }
+    
+    func saveStairsClimbing() -> Void {
+    }
+    
+    func saveSwimming() -> Void {
+    }
+
+
     func savePill() -> Void {
         
         let list = [
