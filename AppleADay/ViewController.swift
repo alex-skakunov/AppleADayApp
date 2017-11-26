@@ -4,7 +4,7 @@
 //
 //  Created by Alexander on 29/12/16.
 //  Copyright (c) 2016 Zero to Hero. All rights reserved.
-//
+// kcal data is from here — http://1trenirovka.com/uprazhneniya/v-domashnih-usloviyah/skolko-kalorij-szhigaetsya-pri-fizicheskih-nagruzkah.html
 
 import UIKit
 import HealthKit
@@ -73,48 +73,52 @@ class ViewController: UIViewController, UITextFieldDelegate {
             // State the health data type(s) we want to write from HealthKit.
             let healthDataToWrite = Set(arrayLiteral:
                 
-                HKCategoryType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sexualActivity)!,
+                HKCategoryType.categoryType(forIdentifier: .sexualActivity)!,
                 
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatTotal)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatSaturated)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatPolyunsaturated)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatMonounsaturated)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryProtein)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietarySugar)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFiber)!,
+                HKObjectType.workoutType(),
+                
+                HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
+                
+                HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryFatSaturated)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryFatPolyunsaturated)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryFatMonounsaturated)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryProtein)!,
+                HKObjectType.quantityType(forIdentifier: .dietarySugar)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryFiber)!,
 
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryEnergyConsumed)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietarySodium)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryPotassium)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCarbohydrates)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatTotal)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+                HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                HKObjectType.quantityType(forIdentifier: .dietarySodium)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryPotassium)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryCarbohydrates)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
                 
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCaffeine)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryPhosphorus)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminA)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminB6)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminD)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminE)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminK)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryThiamin)!, //b1
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryRiboflavin)!, //b2
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryNiacin)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryPantothenicAcid)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFolate)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminB12)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryBiotin)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminC)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCalcium)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryMagnesium)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryIron)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCopper)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryIodine)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryZinc)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryManganese)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietarySelenium)!,
-                HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryMolybdenum)!
+                HKObjectType.quantityType(forIdentifier: .dietaryCaffeine)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryPhosphorus)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryVitaminA)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryVitaminB6)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryVitaminD)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryVitaminE)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryVitaminK)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryThiamin)!, //b1
+                HKObjectType.quantityType(forIdentifier: .dietaryRiboflavin)!, //b2
+                HKObjectType.quantityType(forIdentifier: .dietaryNiacin)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryPantothenicAcid)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryFolate)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryVitaminB12)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryBiotin)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryVitaminC)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryCalcium)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryMagnesium)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryIron)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryCopper)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryIodine)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryZinc)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryManganese)!,
+                HKObjectType.quantityType(forIdentifier: .dietarySelenium)!,
+                HKObjectType.quantityType(forIdentifier: .dietaryMolybdenum)!
             )
             
             // Just in case OneHourWalker makes its way to an iPad...
@@ -280,15 +284,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveHandStand() -> Void {
+        let list = [[HKQuantityTypeIdentifier.activeEnergyBurned, 10.0, "kcal"]] //10 pushups, approx.
+        processData(list)
     }
 
     func savePress() -> Void {
+        let list = [[HKQuantityTypeIdentifier.activeEnergyBurned, 0.5 * 10.0, "kcal"]] //10 presses = 0.5 minute = 0.5 * 10 kcal/minute
+        processData(list)
     }
     
     func savePushUps() -> Void {
+        let list = [[HKQuantityTypeIdentifier.activeEnergyBurned, 0.5 * 17.0, "kcal"]] //10 pushups = 0.5 mins * 17 kcal/minute
+        processData(list)
     }
     
     func saveRopeJumping() -> Void {
+        let list = [[HKQuantityTypeIdentifier.activeEnergyBurned, 10 * 0.085, "kcal"]] //100 jumps
+        processData(list)
     }
     
     func saveSex() -> Void {
@@ -318,12 +330,39 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveSitUps() -> Void {
+        let list = [[HKQuantityTypeIdentifier.activeEnergyBurned, 10 * 0.5, "kcal"]] //10 sit-ups
+        processData(list)
     }
     
     func saveStairsClimbing() -> Void {
+        let list = [
+            [HKQuantityTypeIdentifier.activeEnergyBurned, 0.883, "kcal"],  //1 floor (265 kcal per 5 floors)
+            [HKQuantityTypeIdentifier.flightsClimbed, 1.0, "count"],
+        ]
+        //
+        processData(list)
     }
     
     func saveSwimming() -> Void {
+        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 80.0) //I spend 8-10 min for 250 metres approx.
+        let distance = HKQuantity(unit: HKUnit.meter(), doubleValue: 250.0)
+        let endTime = NSDate()
+        let startTime = endTime.addingTimeInterval(-600) as Date
+        let workout = HKWorkout(
+            activityType: HKWorkoutActivityType.swimming,
+            start: startTime,
+            end: endTime as Date,
+            duration: 600,
+            totalEnergyBurned: energyBurned,
+            totalDistance: distance,
+            metadata: nil
+        )
+        
+        healthStore.save(workout, withCompletion: { (success, error) -> Void in
+            if( error != nil ) {
+                print(error ?? "error!")
+            }
+        })
     }
 
 
