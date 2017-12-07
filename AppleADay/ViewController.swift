@@ -10,6 +10,7 @@
 import UIKit
 import HealthKit
 
+@available(iOS 10.0, *)
 class ViewController: UIViewController, UITextFieldDelegate {
     //MARK: Properties
     
@@ -81,7 +82,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 HKObjectType.workoutType(),
                 
                 HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
-                
+                HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
+
                 HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!,
                 HKObjectType.quantityType(forIdentifier: .dietaryFatSaturated)!,
                 HKObjectType.quantityType(forIdentifier: .dietaryFatPolyunsaturated)!,
@@ -356,11 +358,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         processData(list)
     }
     
+    @available(iOS 10.0, *)
     func saveSwimming() -> Void {
         let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 80.0) //I spend 8-10 min for 250 metres approx.
         let distance = HKQuantity(unit: HKUnit.meter(), doubleValue: 250.0)
         let endTime = NSDate()
         let startTime = endTime.addingTimeInterval(-600) as Date
+        
+        let metadata: [String: Bool] = [
+            HKMetadataKeyIndoorWorkout: true,
+            HKMetadataKeyCoachedWorkout: false
+        ]
+        
         let workout = HKWorkout(
             activityType: HKWorkoutActivityType.swimming,
             start: startTime,
@@ -368,19 +377,60 @@ class ViewController: UIViewController, UITextFieldDelegate {
             duration: 600,
             totalEnergyBurned: energyBurned,
             totalDistance: distance,
-            metadata: nil
+            metadata: metadata
         )
         
-        healthStore.save(workout, withCompletion: { (success, error) -> Void in
+        let healthStore = HKHealthStore()
+        
+        healthStore.save(workout) { (success, error) in
             if( error != nil ) {
                 print(error ?? "error!")
+                return;
             }
-        })
+            
+            // Add optional, detailed information for each time interval
+            var samples: [HKQuantitySample] = []
+            
+            let distanceType = HKObjectType.quantityType(
+                forIdentifier: HKQuantityTypeIdentifier.distanceSwimming
+            )
+            
+            let distancePerIntervalSample = HKQuantitySample(
+                type: distanceType!,
+                quantity: distance,
+                start: startTime,
+                end: endTime as Date
+            )
+            
+            samples.append(distancePerIntervalSample)
+            
+            let energyBurnedType = HKObjectType.quantityType(
+                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+            )
+            
+            let energyBurnedPerIntervalSample = HKQuantitySample(
+                type: energyBurnedType!,
+                quantity: energyBurned,
+                start: startTime,
+                end: endTime as Date
+            )
+            
+            samples.append(energyBurnedPerIntervalSample)
+            
+            healthStore.add(
+                samples,
+                to: workout) { (success, error) -> Void in
+                    if( error != nil ) {
+                        print(error ?? "error!")
+                        return;
+                    }
+            }
+            
+        }
     }
 
 
     func savePill() -> Void {
-        
         let list = [
             [HKQuantityTypeIdentifier.dietaryVitaminA, 800.0, "mcg"],
             [HKQuantityTypeIdentifier.dietaryVitaminD, 5.0, "mcg"],
