@@ -15,6 +15,7 @@
 		114B788A1FA4E1590086BF81 /* granat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 114B78871FA4E1580086BF81 /* granat.jpg */; };
 		114B788B1FA4E1590086BF81 /* coffee.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 114B78881FA4E1590086BF81 /* coffee.jpg */; };
 		114B788C1FA4E1590086BF81 /* apple.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 114B78891FA4E1590086BF81 /* apple.jpg */; };
+		11BEF22B1FD96D5000980C81 /* water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11BEF22A1FD96D5000980C81 /* water.jpg */; };
 		11F6DD131FC827E300E6CE75 /* sex.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD0B1FC827E300E6CE75 /* sex.png */; };
 		11F6DD141FC827E300E6CE75 /* stairs-climbing.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD0C1FC827E300E6CE75 /* stairs-climbing.png */; };
 		11F6DD151FC827E300E6CE75 /* hand-stand.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F6DD0D1FC827E300E6CE75 /* hand-stand.png */; };
@@ -52,6 +53,7 @@
 		114B78871FA4E1580086BF81 /* granat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = granat.jpg; path = assets/granat.jpg; sourceTree = SOURCE_ROOT; };
 		114B78881FA4E1590086BF81 /* coffee.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = coffee.jpg; path = assets/coffee.jpg; sourceTree = SOURCE_ROOT; };
 		114B78891FA4E1590086BF81 /* apple.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = apple.jpg; path = assets/apple.jpg; sourceTree = SOURCE_ROOT; };
+		11BEF22A1FD96D5000980C81 /* water.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = water.jpg; path = assets/water.jpg; sourceTree = SOURCE_ROOT; };
 		11F6DD0B1FC827E300E6CE75 /* sex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sex.png; path = "assets/activity-icons/sex.png"; sourceTree = SOURCE_ROOT; };
 		11F6DD0C1FC827E300E6CE75 /* stairs-climbing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stairs-climbing.png"; path = "assets/activity-icons/stairs-climbing.png"; sourceTree = SOURCE_ROOT; };
 		11F6DD0D1FC827E300E6CE75 /* hand-stand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hand-stand.png"; path = "assets/activity-icons/hand-stand.png"; sourceTree = SOURCE_ROOT; };
@@ -168,6 +170,7 @@
 				1129EBDE1FC30B01007B5408 /* multi-vitamin.jpg */,
 				1129EBE01FC31088007B5408 /* weider-protein-80-plus.jpg */,
 				2C2009221E257304000E1A49 /* pill.png */,
+				11BEF22A1FD96D5000980C81 /* water.jpg */,
 				114B78851FA4DE0D0086BF81 /* mug.jpg */,
 				2C8F40291E1546CE003E9964 /* Info.plist */,
 			);
@@ -299,6 +302,7 @@
 				11F6DD141FC827E300E6CE75 /* stairs-climbing.png in Resources */,
 				1129EBE11FC31089007B5408 /* weider-protein-80-plus.jpg in Resources */,
 				11F6DD191FC827E300E6CE75 /* press.png in Resources */,
+				11BEF22B1FD96D5000980C81 /* water.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

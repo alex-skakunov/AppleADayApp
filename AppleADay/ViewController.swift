@@ -5,6 +5,7 @@
 //  Created by Alexander on 29/12/16.
 //  Copyright (c) 2016 Zero to Hero. All rights reserved.
 // kcal data is from here — http://1trenirovka.com/uprazhneniya/v-domashnih-usloviyah/skolko-kalorij-szhigaetsya-pri-fizicheskih-nagruzkah.html
+// useful - https://www.raywenderlich.com/159019/healthkit-tutorial-swift-getting-started
 
 import UIKit
 import HealthKit
@@ -33,6 +34,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             saveEspresso()
         case "water":
             saveWater()
+        case "tea":
+            saveTea()
         case "apple":
             saveApple()
         case "granat":
@@ -153,17 +156,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryMagnesium, 24.0, "mg"],
             [HKQuantityTypeIdentifier.dietaryWater, 30.0, "mL"]
         ]
-
         processData(list)
-
     }
     
     func saveWater() -> Void {
         let list = [
-            [HKQuantityTypeIdentifier.dietaryWater, 340.0, "mL"]
+            [HKQuantityTypeIdentifier.dietaryWater, 200.0, "mL"]
         ]
         processData(list)
-
+    }
+    
+    func saveTea() -> Void {
+        let list = [
+            [HKQuantityTypeIdentifier.dietaryWater, 340.0, "mL"],
+            [HKQuantityTypeIdentifier.dietaryEnergyConsumed, 3.4, "kcal"],
+            [HKQuantityTypeIdentifier.dietarySodium, 3.4 * 4.0, "mg"],
+            [HKQuantityTypeIdentifier.dietaryPotassium, 3.4 * 18.0, "mg"],
+            [HKQuantityTypeIdentifier.dietaryCarbohydrates, 3.4 * 0.2, "g"],
+            [HKQuantityTypeIdentifier.dietaryProtein, 3.4 * 0.1, "g"],
+            [HKQuantityTypeIdentifier.dietaryCaffeine, 3.4 * 11.0, "mg"]
+        ]
+        processData(list)
     }
     
     func saveApple() -> Void {
