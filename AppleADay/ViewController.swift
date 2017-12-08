@@ -73,68 +73,66 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func getHealthKitPermission() {
-        if HKHealthStore.isHealthDataAvailable() {
-            // State the health data type(s) we want to write from HealthKit.
-            let healthDataToWrite = Set(arrayLiteral:
-                
-                HKCategoryType.categoryType(forIdentifier: .sexualActivity)!,
-                
-                HKObjectType.workoutType(),
-                
-                HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
-                HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
-
-                HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryFatSaturated)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryFatPolyunsaturated)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryFatMonounsaturated)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryProtein)!,
-                HKObjectType.quantityType(forIdentifier: .dietarySugar)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryFiber)!,
-
-                HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-                HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
-                HKObjectType.quantityType(forIdentifier: .dietarySodium)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryPotassium)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryCarbohydrates)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
-                
-                HKObjectType.quantityType(forIdentifier: .dietaryCaffeine)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryPhosphorus)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryVitaminA)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryVitaminB6)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryVitaminD)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryVitaminE)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryVitaminK)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryThiamin)!, //b1
-                HKObjectType.quantityType(forIdentifier: .dietaryRiboflavin)!, //b2
-                HKObjectType.quantityType(forIdentifier: .dietaryNiacin)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryPantothenicAcid)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryFolate)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryVitaminB12)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryBiotin)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryVitaminC)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryCalcium)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryMagnesium)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryIron)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryCopper)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryIodine)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryZinc)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryManganese)!,
-                HKObjectType.quantityType(forIdentifier: .dietarySelenium)!,
-                HKObjectType.quantityType(forIdentifier: .dietaryMolybdenum)!
-            )
+        // State the health data type(s) we want to write from HealthKit.
+        let healthDataToWrite = Set(arrayLiteral:
             
-            // Just in case OneHourWalker makes its way to an iPad...
-            if !HKHealthStore.isHealthDataAvailable() {
-                print("Can't access HealthKit.")
-            }
+            HKCategoryType.categoryType(forIdentifier: .sexualActivity)!,
             
-            // Request authorization to read and/or write the specific data.
-            healthStore.requestAuthorization(toShare: healthDataToWrite, read: nil) { (success, error) -> Void in
-                print(success);
-            }
+            HKObjectType.workoutType(),
+            
+            HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
+            HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
+
+            HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryFatSaturated)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryFatPolyunsaturated)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryFatMonounsaturated)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryProtein)!,
+            HKObjectType.quantityType(forIdentifier: .dietarySugar)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryFiber)!,
+
+            HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+            HKObjectType.quantityType(forIdentifier: .dietarySodium)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryPotassium)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryCarbohydrates)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
+            
+            HKObjectType.quantityType(forIdentifier: .dietaryCaffeine)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryPhosphorus)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryVitaminA)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryVitaminB6)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryVitaminD)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryVitaminE)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryVitaminK)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryThiamin)!, //b1
+            HKObjectType.quantityType(forIdentifier: .dietaryRiboflavin)!, //b2
+            HKObjectType.quantityType(forIdentifier: .dietaryNiacin)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryPantothenicAcid)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryFolate)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryVitaminB12)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryBiotin)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryVitaminC)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryCalcium)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryMagnesium)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryIron)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryCopper)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryIodine)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryZinc)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryManganese)!,
+            HKObjectType.quantityType(forIdentifier: .dietarySelenium)!,
+            HKObjectType.quantityType(forIdentifier: .dietaryMolybdenum)!
+        )
+        
+        // Just in case OneHourWalker makes its way to an iPad...
+        if !HKHealthStore.isHealthDataAvailable() {
+            print("Can't access HealthKit.")
+        }
+        
+        // Request authorization to read and/or write the specific data.
+        healthStore.requestAuthorization(toShare: healthDataToWrite, read: nil) { (success, error) -> Void in
+            //print(success);
         }
     }
     
