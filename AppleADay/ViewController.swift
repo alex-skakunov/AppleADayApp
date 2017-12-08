@@ -313,8 +313,51 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveRopeJumping() -> Void {
-        let list = [[HKQuantityTypeIdentifier.activeEnergyBurned, 10 * 0.085, "kcal"]] //100 jumps
-        processData(list)
+        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 0.85) //100 jumps
+        let endTime = NSDate()
+        let startTime = endTime.addingTimeInterval(-90) as Date
+        let metadata: [String: Bool] = [
+            HKMetadataKeyIndoorWorkout: true
+        ]
+        
+        let workout = HKWorkout(
+            activityType: HKWorkoutActivityType.jumpRope,
+            start: startTime,
+            end: endTime as Date,
+            duration: 90,
+            totalEnergyBurned: energyBurned,
+            totalDistance: nil,
+            metadata: metadata
+        )
+        
+        healthStore.save(workout) { (success, error) in
+            if( error != nil ) {
+                print(error ?? "error!")
+                return;
+            }
+            
+            var samples: [HKQuantitySample] = []
+            
+            let energyBurnedType = HKObjectType.quantityType(
+                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+            )
+            let energyBurnedPerIntervalSample = HKQuantitySample(
+                type: energyBurnedType!,
+                quantity: energyBurned,
+                start: startTime,
+                end: endTime as Date
+            )
+            samples.append(energyBurnedPerIntervalSample)
+            
+            self.healthStore.add(
+                samples,
+                to: workout) { (success, error) -> Void in
+                    if( error != nil ) {
+                        print(error ?? "error!")
+                        return;
+                    }
+            }
+        }
     }
     
     func saveSex() -> Void {
@@ -352,7 +395,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 0.883)
         let distance = HKQuantity(unit: HKUnit.meter(), doubleValue: 7.0)
         let endTime = NSDate()
-        let startTime = endTime.addingTimeInterval(-600) as Date
+        let startTime = endTime.addingTimeInterval(-30) as Date
         let metadata: [String: Bool] = [
             HKMetadataKeyIndoorWorkout: true
         ]
@@ -415,7 +458,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         print(error ?? "error!")
                         return;
                     }
-            }            
+            }
         }
     }
     
