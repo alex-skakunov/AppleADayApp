@@ -82,6 +82,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
             HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
+            HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
 
             HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!,
             HKObjectType.quantityType(forIdentifier: .dietaryFatSaturated)!,
@@ -348,6 +349,77 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveStairsClimbing() -> Void {
+        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 0.883)
+        let distance = HKQuantity(unit: HKUnit.meter(), doubleValue: 7.0)
+        let endTime = NSDate()
+        let startTime = endTime.addingTimeInterval(-600) as Date
+        let metadata: [String: Bool] = [
+            HKMetadataKeyIndoorWorkout: true
+        ]
+        
+        let workout = HKWorkout(
+            activityType: HKWorkoutActivityType.stairs,
+            start: startTime,
+            end: endTime as Date,
+            duration: 30,
+            totalEnergyBurned: energyBurned,
+            totalDistance: distance,
+            metadata: metadata
+        )
+        
+        healthStore.save(workout) { (success, error) in
+            if( error != nil ) {
+                print(error ?? "error!")
+                return;
+            }
+            
+            var samples: [HKQuantitySample] = []
+            
+            let distanceType = HKObjectType.quantityType(
+                forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning
+            )
+            let distancePerIntervalSample = HKQuantitySample(
+                type: distanceType!,
+                quantity: distance,
+                start: startTime,
+                end: endTime as Date
+            )
+            samples.append(distancePerIntervalSample)
+            
+            let energyBurnedType = HKObjectType.quantityType(
+                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+            )
+            let energyBurnedPerIntervalSample = HKQuantitySample(
+                type: energyBurnedType!,
+                quantity: energyBurned,
+                start: startTime,
+                end: endTime as Date
+            )
+            samples.append(energyBurnedPerIntervalSample)
+            
+            let flightsType = HKObjectType.quantityType(
+                forIdentifier: HKQuantityTypeIdentifier.flightsClimbed
+            )
+            let oneFloorUp = HKQuantitySample(
+                type: flightsType!,
+                quantity: HKQuantity(unit: HKUnit.count(), doubleValue: 1.0),
+                start: startTime,
+                end: endTime as Date
+            )
+            samples.append(oneFloorUp)
+            
+            self.healthStore.add(
+                samples,
+                to: workout) { (success, error) -> Void in
+                    if( error != nil ) {
+                        print(error ?? "error!")
+                        return;
+                    }
+            }
+            
+        }
+
+
         let list = [
             [HKQuantityTypeIdentifier.activeEnergyBurned, 0.883, "kcal"],  //1 floor (265 kcal per 5 floors)
             [HKQuantityTypeIdentifier.flightsClimbed, 1.0, "count"],
