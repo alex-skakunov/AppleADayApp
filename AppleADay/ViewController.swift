@@ -415,17 +415,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         print(error ?? "error!")
                         return;
                     }
-            }
-            
+            }            
         }
-
-
-        let list = [
-            [HKQuantityTypeIdentifier.activeEnergyBurned, 0.883, "kcal"],  //1 floor (265 kcal per 5 floors)
-            [HKQuantityTypeIdentifier.flightsClimbed, 1.0, "count"],
-        ]
-        //
-        processData(list)
     }
     
     @available(iOS 10.0, *)
