@@ -344,8 +344,49 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     func savePress() -> Void {
-        let list = [[HKQuantityTypeIdentifier.activeEnergyBurned, 0.5 * 10.0, "kcal"]] //10 presses = 0.5 minute = 0.5 * 10 kcal/minute
-        processData(list)
+        let duration = 30 //seconds
+        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 0.5 * 10.0) //10 presses = 0.5 minute = 0.5 * 10 kcal/minute
+        let endTime = NSDate()
+        let startTime = endTime.addingTimeInterval(TimeInterval(-duration)) as Date
+        let metadata: [String: Bool] = [HKMetadataKeyIndoorWorkout: true]
+        let workout = HKWorkout(
+            activityType: HKWorkoutActivityType.coreTraining,
+            start: startTime,
+            end: endTime as Date,
+            duration: TimeInterval(duration),
+            totalEnergyBurned: energyBurned,
+            totalDistance: nil,
+            metadata: metadata
+        )
+        
+        healthStore.save(workout) { (success, error) in
+            if( error != nil ) {
+                print(error ?? "error!")
+                return;
+            }
+            
+            var samples: [HKQuantitySample] = []
+            
+            let energyBurnedType = HKObjectType.quantityType(
+                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+            )
+            let energyBurnedPerIntervalSample = HKQuantitySample(
+                type: energyBurnedType!,
+                quantity: energyBurned,
+                start: startTime,
+                end: endTime as Date
+            )
+            samples.append(energyBurnedPerIntervalSample)
+            
+            self.healthStore.add(
+                samples,
+                to: workout) { (success, error) -> Void in
+                    if( error != nil ) {
+                        print(error ?? "error!")
+                        return;
+                    }
+            }
+        }
     }
     
     func savePushUps() -> Void {
