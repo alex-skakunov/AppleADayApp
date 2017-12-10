@@ -555,15 +555,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+
     func saveStairsClimbing() -> Void {
         let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 0.883)
         let distance = HKQuantity(unit: HKUnit.meter(), doubleValue: 7.0)
         let endTime = NSDate()
         let startTime = endTime.addingTimeInterval(-30) as Date
-        let metadata: [String: Bool] = [
-            HKMetadataKeyIndoorWorkout: true
-        ]
-        
+        var metadata: [String: Any] = [HKMetadataKeyIndoorWorkout: true]
+
+        if #available(iOS 11.2, *) {
+            let elevation = HKQuantity(unit: HKUnit.meter(), doubleValue: 3.0)
+            metadata[HKMetadataKeyElevationAscended] = elevation
+        }
         let workout = HKWorkout(
             activityType: HKWorkoutActivityType.stairs,
             start: startTime,
