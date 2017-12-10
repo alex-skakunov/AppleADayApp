@@ -298,8 +298,49 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveHandStand() -> Void {
-        let list = [[HKQuantityTypeIdentifier.activeEnergyBurned, 10.0, "kcal"]] //10 pushups, approx.
-        processData(list)
+        let duration = 30 //seconds
+        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 10.0) //10 pushups, approx.
+        let endTime = NSDate()
+        let startTime = endTime.addingTimeInterval(TimeInterval(-duration)) as Date
+        let metadata: [String: Bool] = [HKMetadataKeyIndoorWorkout: true]
+        let workout = HKWorkout(
+            activityType: HKWorkoutActivityType.gymnastics,
+            start: startTime,
+            end: endTime as Date,
+            duration: TimeInterval(duration),
+            totalEnergyBurned: energyBurned,
+            totalDistance: nil,
+            metadata: metadata
+        )
+        
+        healthStore.save(workout) { (success, error) in
+            if( error != nil ) {
+                print(error ?? "error!")
+                return;
+            }
+            
+            var samples: [HKQuantitySample] = []
+            
+            let energyBurnedType = HKObjectType.quantityType(
+                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+            )
+            let energyBurnedPerIntervalSample = HKQuantitySample(
+                type: energyBurnedType!,
+                quantity: energyBurned,
+                start: startTime,
+                end: endTime as Date
+            )
+            samples.append(energyBurnedPerIntervalSample)
+            
+            self.healthStore.add(
+                samples,
+                to: workout) { (success, error) -> Void in
+                    if( error != nil ) {
+                        print(error ?? "error!")
+                        return;
+                    }
+            }
+        }
     }
 
     func savePress() -> Void {
