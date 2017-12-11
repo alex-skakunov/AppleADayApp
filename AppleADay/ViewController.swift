@@ -157,14 +157,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryMagnesium, 24.0, "mg"],
             [HKQuantityTypeIdentifier.dietaryWater, 30.0, "mL"]
         ]
-        processData(list)
+        processData(list, "espresso")
     }
     
     func saveWater() -> Void {
         let list = [
             [HKQuantityTypeIdentifier.dietaryWater, 200.0, "mL"]
         ]
-        processData(list)
+        processData(list, "200 ml glass of water")
     }
     
     func saveTea() -> Void {
@@ -177,7 +177,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryProtein, 3.4 * 0.1, "g"],
             [HKQuantityTypeIdentifier.dietaryCaffeine, 3.4 * 11.0, "mg"]
         ]
-        processData(list)
+        processData(list, "Mug of tea")
     }
     
     func saveApple() -> Void {
@@ -193,8 +193,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryProtein, 0.5, "g"]
         ]
         
-        processData(list)
-        
         let list2 = [
             
             [HKQuantityTypeIdentifier.dietarySodium, 1.8, "mg"], //Na
@@ -208,7 +206,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             [HKQuantityTypeIdentifier.dietaryWater, 156.0, "mL"]        ]
         
-        processData(list2)
+        processData(list, "An apple")
+        processData(list2, "An apple")
 
     }
     
@@ -226,8 +225,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryProtein, 1.7, "g"],
             [HKQuantityTypeIdentifier.dietaryCarbohydrates, 19.0, "g"]
         ]
-        
-        processData(list)
         
         let list2 = [
             [HKQuantityTypeIdentifier.dietarySodium, 4.0, "mg"], //Na
@@ -247,7 +244,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryWater, 100.0, "mL"]
             
         ]
-        processData(list2)
+        processData(list, "Granat")
+        processData(list2, "Granat")
         
     }
     
@@ -267,8 +265,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryBiotin, 165.0, "mcg"],
             [HKQuantityTypeIdentifier.dietaryPantothenicAcid, 80.0, "mg"]
         ]
-        processData(list)
-        
         let list2 = [
             [HKQuantityTypeIdentifier.dietaryCalcium, 152.0, "mg"], //Ca
             [HKQuantityTypeIdentifier.dietaryMagnesium, 145.0, "mg"], //Mg
@@ -278,7 +274,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryMolybdenum, 10.0, "mcg"],
             [HKQuantityTypeIdentifier.dietaryPotassium, 35.0, "mg"]
         ]
-        processData(list2)
+        processData(list, "Mutli-vitamins")
+        processData(list2, "Mutli-vitamins")
     }
 
 
@@ -294,7 +291,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryVitaminB6, 0.6, "mg"],
             [HKQuantityTypeIdentifier.dietaryCalcium, 400.0, "mg"]
         ]
-        processData(list)
+        processData(list, "Weider protein")
     }
     
     func saveHandStand() -> Void {
@@ -506,7 +503,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let list = [
             [HKQuantityTypeIdentifier.activeEnergyBurned, 42.0, "kcal"], //252 kcal/hour
             ]
-        processData(list)
+        processData(list, "Sex")
     }
     
     func saveSitUps() -> Void {
@@ -730,21 +727,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryMolybdenum, 50.0, "mcg"]
         ]
         
-        processData(list)
-        processData(list2)
+        processData(list, "Supradin pill")
+        processData(list2, "Supradin pill")
         
     }
     
     
-    func processData(_ list: [[Any]]) {
+    func processData(_ list: [[Any]], _ title: String) {
         for item in list {
             guard let quantityType = HKObjectType.quantityType(forIdentifier: item[0] as! HKQuantityTypeIdentifier) else {
                 continue
             }
             let unit = HKUnit(from: item[2] as! String)
             let quantity = HKQuantity(unit: unit, doubleValue: item[1] as! Double)
-            
-            let quantitySample = HKQuantitySample(type: quantityType, quantity: quantity, start: NSDate() as Date, end: NSDate() as Date)
+
+            let metadata: [String: String]? = ["Title": title]
+
+            let quantitySample = HKQuantitySample(
+                type: quantityType,
+                quantity: quantity,
+                start: NSDate() as Date,
+                end: NSDate() as Date,
+                metadata: metadata
+            )
             healthStore.save(quantitySample, withCompletion: { (success, error) -> Void in
                 if( error != nil ) {
                     print(error ?? "error!")
