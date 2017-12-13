@@ -823,31 +823,43 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func processData(_ list: [[Any]], _ title: String) {
+    func buildSamplesList(_ list: [[Any]], _ title: String, _ start: NSDate, _ end: NSDate) -> [HKSample] {
+        var samplesArray = [HKSample]()
+
         for item in list {
             guard let quantityType = HKObjectType.quantityType(forIdentifier: item[0] as! HKQuantityTypeIdentifier) else {
                 continue
             }
             let unit = HKUnit(from: item[2] as! String)
             let quantity = HKQuantity(unit: unit, doubleValue: item[1] as! Double)
-
+            
             let metadata: [String: String]? = ["Title": title]
-
-            let quantitySample = HKQuantitySample(
+            
+            let sample = HKQuantitySample(
                 type: quantityType,
                 quantity: quantity,
-                start: NSDate() as Date,
-                end: NSDate() as Date,
+                start: start as Date,
+                end: end as Date,
                 metadata: metadata
             )
-            healthStore.save(quantitySample, withCompletion: { (success, error) -> Void in
+            
+            samplesArray.append(sample);
+        }
+        return samplesArray
+    }
+    
+    func processData(_ list: [[Any]], _ title: String) {
+        let samplesArray = buildSamplesList(list, title, NSDate(), NSDate())
+        
+        for sample in samplesArray {
+            healthStore.save(sample, withCompletion: { (success, error) -> Void in
                 if( error != nil ) {
                     print(error ?? "error!")
                 }
             })
         }
     }
-
+    
 
 
 }
