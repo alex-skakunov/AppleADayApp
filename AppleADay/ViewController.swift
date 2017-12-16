@@ -148,95 +148,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveEspresso() -> Void {
-        let endTime = NSDate()
-        let duration = 60 //seconds
-        let startTime = endTime.addingTimeInterval(TimeInterval(-duration)) as Date
-        
-        let quantityType = HKObjectType.quantityType(
-            forIdentifier: HKQuantityTypeIdentifier.dietaryCaffeine
-        )
-        let unit = HKUnit(from: "mg")
-        let quantity = HKQuantity(unit: unit, doubleValue: 63.6)
-        
-        let metadata: [String: String]? = ["Title": "Espresso"]
-        
-        let coffeineSample = HKQuantitySample(
-            type: quantityType!,
-            quantity: quantity,
-            start: startTime,
-            end: endTime as Date,
-            metadata: metadata
-        )
-        
-        let waterType = HKObjectType.quantityType(
-            forIdentifier: HKQuantityTypeIdentifier.dietaryWater
-        )
-        let waterUnit = HKUnit(from: "mL")
-        let waterQuantity = HKQuantity(unit: waterUnit, doubleValue: 30.0)
-        
-        let waterSample = HKQuantitySample(
-            type: waterType!,
-            quantity: waterQuantity,
-            start: startTime,
-            end: endTime as Date,
-            metadata: metadata
-        )
-        
-        let objects : NSSet = NSSet(objects: coffeineSample, waterSample)
-        
-        let foodType: HKCorrelationType = HKObjectType.correlationType(forIdentifier: .food)!
-        let foodMetadata: [String: String]? = [HKMetadataKeyFoodType: "Cup of espresso"]
-
-        let foodCorrelation : HKCorrelation = HKCorrelation(
-            type: foodType,
-            start: startTime,
-            end: endTime as Date,
-            objects: objects as! Set<HKSample>,
-            metadata: foodMetadata
-        )
-        
-        healthStore.save(foodCorrelation, withCompletion: { (success, error) -> Void in
-            if( error != nil ) {
-                print(error ?? "error!")
-            }
-        })
-
-        //let food = HKCategoryType.correlationType(forIdentifier: .food)
-        
-        
-
-/*
-        let foodSample = HKCorrelationType(
-            type: food!,
-            start: endTime.addingTimeInterval(-600) as Date,
-            end: endTime as Date,
-            metadata: metadata
-        )
-
-        healthStore.save(foodSample) { (success, error) in
-            if( error != nil ) {
-                print(error ?? "error!")
-                return;
-            }
-            
-            var samples: [HKQuantitySample] = []
-            
-        }
-
-        let sexSample = HKCategorySample(
-            type: sexualActivity!,
-            value: HKCategoryValue.notApplicable.rawValue,
-            start: endTime.addingTimeInterval(-600) as Date,
-            end: endTime as Date,
-            metadata: metadata
-        )
-        
-        healthStore.save(food, withCompletion: { (success, error) -> Void in
-            if( error != nil ) {
-                print(error ?? "error!")
-            }
-        })
-
         let list = [
             [HKQuantityTypeIdentifier.dietaryFatTotal, 0.1, "g"],
             [HKQuantityTypeIdentifier.dietarySodium, 4.2, "mg"],
@@ -246,8 +157,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryMagnesium, 24.0, "mg"],
             [HKQuantityTypeIdentifier.dietaryWater, 30.0, "mL"]
         ]
-        processData(list, "espresso")
-        */
+
+        let endTime = NSDate()
+        let duration = 60 //seconds
+        let startTime = endTime.addingTimeInterval(TimeInterval(-duration))
+        let title = "Espresso"
+        
+        let samples = buildSamplesList(list, title, startTime, endTime)
+        
+        let foodType: HKCorrelationType = HKObjectType.correlationType(forIdentifier: .food)!
+        let foodMetadata: [String: String]? = [HKMetadataKeyFoodType: title]
+
+        let foodCorrelation : HKCorrelation = HKCorrelation(
+            type: foodType,
+            start: startTime as Date,
+            end: endTime as Date,
+            objects: NSSet(array: samples) as! Set<HKSample>,
+            metadata: foodMetadata
+        )
+        
+        healthStore.save(foodCorrelation, withCompletion: { (success, error) -> Void in
+            if( error != nil ) {
+                print(error ?? "error!")
+            }
+        })
+        
     }
     
     func saveWater() -> Void {
