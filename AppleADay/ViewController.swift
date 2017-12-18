@@ -338,7 +338,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
             [HKQuantityTypeIdentifier.dietaryVitaminB6, 0.6, "mg"],
             [HKQuantityTypeIdentifier.dietaryCalcium, 400.0, "mg"]
         ]
-        processData(list, "Weider protein")
+        let endTime = NSDate()
+        let duration = 60 //seconds
+        let startTime = endTime.addingTimeInterval(TimeInterval(-duration))
+        let title = "Weider protein"
+        
+        let samples = buildSamplesList(list, title, startTime, endTime)
+        
+        let foodType: HKCorrelationType = HKObjectType.correlationType(forIdentifier: .food)!
+        let foodMetadata: [String: String]? = [HKMetadataKeyFoodType: title]
+        
+        let foodCorrelation : HKCorrelation = HKCorrelation(
+            type: foodType,
+            start: startTime as Date,
+            end: endTime as Date,
+            objects: NSSet(array: samples) as! Set<HKSample>,
+            metadata: foodMetadata
+        )
+        
+        healthStore.save(foodCorrelation, withCompletion: { (success, error) -> Void in
+            if( error != nil ) {
+                print(error ?? "error!")
+            }
+        })
     }
     
     func saveHandStand() -> Void {
