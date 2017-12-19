@@ -147,221 +147,165 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    
     func saveEspresso() -> Void {
-        let list = [
-            [HKQuantityTypeIdentifier.dietaryFatTotal, 0.1, "g"],
-            [HKQuantityTypeIdentifier.dietarySodium, 4.2, "mg"],
-            [HKQuantityTypeIdentifier.dietaryPotassium, 34.5, "mg"],
-            [HKQuantityTypeIdentifier.dietaryCarbohydrates, 0.5, "g"],
-            [HKQuantityTypeIdentifier.dietaryCaffeine, 63.6, "mg"],
-            [HKQuantityTypeIdentifier.dietaryMagnesium, 24.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryWater, 30.0, "mL"]
-        ]
-
-        let endTime = NSDate()
-        let duration = 60 //seconds
-        let startTime = endTime.addingTimeInterval(TimeInterval(-duration))
-        let title = "Espresso"
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [3.0, "kcal"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [0.5, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [34.5, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [24.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatTotal] = [0.1, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCaffeine] = [63.6, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietarySodium] = [4.2, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [30.0, "mL"]
         
-        let samples = buildSamplesList(list, title, startTime, endTime)
-        
-        let foodType: HKCorrelationType = HKObjectType.correlationType(forIdentifier: .food)!
-        let foodMetadata: [String: String]? = [HKMetadataKeyFoodType: title]
-
-        let foodCorrelation : HKCorrelation = HKCorrelation(
-            type: foodType,
-            start: startTime as Date,
-            end: endTime as Date,
-            objects: NSSet(array: samples) as! Set<HKSample>,
-            metadata: foodMetadata
-        )
-        
-        healthStore.save(foodCorrelation, withCompletion: { (success, error) -> Void in
-            if( error != nil ) {
-                print(error ?? "error!")
-            }
-        })
-        
+        saveFoodSample(samplesList, 60, "Espresso")
     }
     
     func saveWater() -> Void {
-        let list = [
-            [HKQuantityTypeIdentifier.dietaryWater, 200.0, "mL"]
-        ]
-        processData(list, "200 ml glass of water")
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [200.0, "mL"]
+        saveFoodSample(samplesList, 60, "200 ml of water")
     }
     
     func saveTea() -> Void {
-        let list = [
-            [HKQuantityTypeIdentifier.dietaryWater, 340.0, "mL"],
-            [HKQuantityTypeIdentifier.dietaryEnergyConsumed, 3.4, "kcal"],
-            [HKQuantityTypeIdentifier.dietarySodium, 3.4 * 4.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryPotassium, 3.4 * 18.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryCarbohydrates, 3.4 * 0.2, "g"],
-            [HKQuantityTypeIdentifier.dietaryProtein, 3.4 * 0.1, "g"],
-            [HKQuantityTypeIdentifier.dietaryCaffeine, 3.4 * 11.0, "mg"]
-        ]
-        let endTime = NSDate()
-        let duration = 60 //seconds
-        let startTime = endTime.addingTimeInterval(TimeInterval(-duration))
-        let title = "Tea"
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [340.0, " mL"]
+        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [3.4, "kcal"]
+        samplesList[HKQuantityTypeIdentifier.dietarySodium] = [3.4 * 4, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [3.4 * 18.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [3.4 * 0.2, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryProtein] = [3.4 * 0.1, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCaffeine] = [3.4 * 11, "mg"]
         
-        let samples = buildSamplesList(list, title, startTime, endTime)
-        
-        let foodType: HKCorrelationType = HKObjectType.correlationType(forIdentifier: .food)!
-        let foodMetadata: [String: String]? = [HKMetadataKeyFoodType: title]
-        
-        let foodCorrelation : HKCorrelation = HKCorrelation(
-            type: foodType,
-            start: startTime as Date,
-            end: endTime as Date,
-            objects: NSSet(array: samples) as! Set<HKSample>,
-            metadata: foodMetadata
-        )
-        
-        healthStore.save(foodCorrelation, withCompletion: { (success, error) -> Void in
-            if( error != nil ) {
-                print(error ?? "error!")
-            }
-        })
-
+        saveFoodSample(samplesList, 60, "Tea")
     }
     
     func saveApple() -> Void {
-        let list = [
-            [HKQuantityTypeIdentifier.dietaryEnergyConsumed, 47.0, "kcal"],
-            [HKQuantityTypeIdentifier.dietaryFatTotal, 0.3, "g"],
-            [HKQuantityTypeIdentifier.dietaryFatSaturated, 0.1, "g"],
-            [HKQuantityTypeIdentifier.dietaryFatPolyunsaturated, 0.1, "g"],
-            
-            [HKQuantityTypeIdentifier.dietaryCarbohydrates, 25.0, "g"],
-            [HKQuantityTypeIdentifier.dietaryFiber, 4.4, "g"],
-            [HKQuantityTypeIdentifier.dietarySugar, 19.0, "g"],
-            [HKQuantityTypeIdentifier.dietaryProtein, 0.5, "g"]
-        ]
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [47.0, "kcal"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatTotal] = [0.3, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatSaturated] = [0.1, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatPolyunsaturated] = [0.1, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [25.0, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFiber] = [4.4, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietarySugar] = [19.0, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryProtein] = [0.5, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietarySodium] = [1.8, "mg"] //Na
+        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [194.7, "mg"] //K
+        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [9.1, "mg"] //Mg
+        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [10.9, "mg"] //Ca
+        samplesList[HKQuantityTypeIdentifier.dietaryIron] = [0.2, "mg"] //Fe
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [0.1, "mg"] //B6
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminC] = [8.4, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [156.0, "mL"]
         
-        let list2 = [
-            
-            [HKQuantityTypeIdentifier.dietarySodium, 1.8, "mg"], //Na
-            [HKQuantityTypeIdentifier.dietaryPotassium, 194.7, "mg"], //K
-            [HKQuantityTypeIdentifier.dietaryMagnesium, 9.1, "mg"], //Mg
-            [HKQuantityTypeIdentifier.dietaryCalcium, 10.9, "mg"], //Ca
-            [HKQuantityTypeIdentifier.dietaryIron, 0.2, "mg"], //Fe
-            
-            [HKQuantityTypeIdentifier.dietaryVitaminB6, 0.1, "mg"], //B6
-            [HKQuantityTypeIdentifier.dietaryVitaminC, 8.4, "mg"],
-            
-            [HKQuantityTypeIdentifier.dietaryWater, 156.0, "mL"]        ]
-        
-        processData(list, "An apple")
-        processData(list2, "An apple")
-
+        saveFoodSample(samplesList, 60, "Apple")
     }
     
     /* 100 ml of granat joice */
     func saveGranat() -> Void {
-        let list = [
-            [HKQuantityTypeIdentifier.dietaryEnergyConsumed, 56.0, "kcal"],
-            [HKQuantityTypeIdentifier.dietaryFatTotal, 1.2, "g"],
-            [HKQuantityTypeIdentifier.dietaryFatSaturated, 0.1, "g"],
-            [HKQuantityTypeIdentifier.dietaryFatPolyunsaturated, 0.1, "g"],
-            [HKQuantityTypeIdentifier.dietaryFatMonounsaturated, 0.1, "g"],
-            
-            [HKQuantityTypeIdentifier.dietaryFiber, 4.0, "g"],
-            [HKQuantityTypeIdentifier.dietarySugar, 14.0, "g"],
-            [HKQuantityTypeIdentifier.dietaryProtein, 1.7, "g"],
-            [HKQuantityTypeIdentifier.dietaryCarbohydrates, 19.0, "g"]
-        ]
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [56.0, "kcal"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatTotal] = [1.2, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatSaturated] = [0.1, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatPolyunsaturated] = [0.1, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatMonounsaturated] = [0.1, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFiber] = [4.0, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietarySugar] = [14.0, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryProtein] = [1.7, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [19.0, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietarySodium] = [4.0, "mg"] //Na
+        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [102.0, "mg"] //K
+        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [5.0, "mg"] //Mg
+        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [12.0, "mg"] //Ca
+        samplesList[HKQuantityTypeIdentifier.dietaryPhosphorus] = [8.0, "mg"] //P
+        samplesList[HKQuantityTypeIdentifier.dietaryIron] = [1.0, "mg"] //Fe
+        samplesList[HKQuantityTypeIdentifier.dietaryThiamin] = [0.04, "mg"] //B1
+        samplesList[HKQuantityTypeIdentifier.dietaryRiboflavin] = [0.1, "mg"] //B2
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [0.4, "mg"] //B6
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB12] = [0.31, "mg"] //B12
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminC] = [4.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryNiacin] = [1.5, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [100.0, "mL"]
         
-        let list2 = [
-            [HKQuantityTypeIdentifier.dietarySodium, 4.0, "mg"], //Na
-            [HKQuantityTypeIdentifier.dietaryPotassium, 102.0, "mg"], //K
-            [HKQuantityTypeIdentifier.dietaryMagnesium, 5.0, "mg"], //Mg
-            [HKQuantityTypeIdentifier.dietaryCalcium, 12.0, "mg"], //Ca
-            [HKQuantityTypeIdentifier.dietaryPhosphorus, 8.0, "mg"], //P
-            [HKQuantityTypeIdentifier.dietaryIron, 1.0, "mg"], //Fe
-            
-            [HKQuantityTypeIdentifier.dietaryThiamin, 0.04, "mg"], //B1
-            [HKQuantityTypeIdentifier.dietaryRiboflavin, 0.1, "mg"], //B2
-            [HKQuantityTypeIdentifier.dietaryVitaminB6, 0.4, "mg"], //B6
-            [HKQuantityTypeIdentifier.dietaryVitaminB12, 0.31, "mg"], //B12
-            [HKQuantityTypeIdentifier.dietaryVitaminC, 4.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryNiacin, 1.5, "mg"],
-            
-            [HKQuantityTypeIdentifier.dietaryWater, 100.0, "mL"]
-            
-        ]
-        processData(list, "Granat")
-        processData(list2, "Granat")
+        saveFoodSample(samplesList, 60, "Granat juice")
         
     }
     
     /* 100 ml of granat joice */
     func saveMultiVitaminMuscleTech() -> Void {
-        let list = [
-            [HKQuantityTypeIdentifier.dietaryVitaminA, 6.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryVitaminC, 135.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryVitaminD, 10.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryVitaminE, 81.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryThiamin, 20.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryRiboflavin, 13.5, "mg"],
-            [HKQuantityTypeIdentifier.dietaryNiacin, 60.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryVitaminB6, 10.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryFolate, 300.0, "mcg"], //folic acid
-            [HKQuantityTypeIdentifier.dietaryVitaminB12, 100.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryBiotin, 165.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryPantothenicAcid, 80.0, "mg"]
-        ]
-        let list2 = [
-            [HKQuantityTypeIdentifier.dietaryCalcium, 152.0, "mg"], //Ca
-            [HKQuantityTypeIdentifier.dietaryMagnesium, 145.0, "mg"], //Mg
-            [HKQuantityTypeIdentifier.dietaryZinc, 9.5, "mg"],
-            [HKQuantityTypeIdentifier.dietaryCopper, 1.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryManganese, 7.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryMolybdenum, 10.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryPotassium, 35.0, "mg"]
-        ]
-        processData(list, "Mutli-vitamins")
-        processData(list2, "Mutli-vitamins")
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminA] = [6.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminC] = [135.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminD] = [10.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminE] = [81.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryThiamin] = [20.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryRiboflavin] = [13.5, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryNiacin] = [60.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [10.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFolate] = [300.0, "mcg"] //folic acid
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB12] = [100.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryBiotin] = [165.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryPantothenicAcid] = [80.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [152.0, "mg"] //Ca
+        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [145.0, "mg"] //Mg
+        samplesList[HKQuantityTypeIdentifier.dietaryZinc] = [9.5, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCopper] = [1.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryManganese] = [7.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryMolybdenum] = [10.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [35.0, "mg"]
+        
+        saveFoodSample(samplesList, 60, "Mutli-vitamins")
     }
 
 
     
     func saveWeiderProtein() -> Void {
-        let list = [
-            [HKQuantityTypeIdentifier.dietaryEnergyConsumed, 110.0, "kcal"],
-            [HKQuantityTypeIdentifier.dietaryFatTotal, 0.5, "g"],
-            [HKQuantityTypeIdentifier.dietaryFatSaturated, 0.3, "g"],
-            [HKQuantityTypeIdentifier.dietaryCarbohydrates, 2.3, "g"],
-            [HKQuantityTypeIdentifier.dietarySugar, 2.0, "g"],
-            [HKQuantityTypeIdentifier.dietaryProtein, 24.0, "g"],
-            [HKQuantityTypeIdentifier.dietaryVitaminB6, 0.6, "mg"],
-            [HKQuantityTypeIdentifier.dietaryCalcium, 400.0, "mg"]
-        ]
-        let endTime = NSDate()
-        let duration = 60 //seconds
-        let startTime = endTime.addingTimeInterval(TimeInterval(-duration))
-        let title = "Weider protein"
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [110.0, "kcal"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatTotal] = [0.5, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFatSaturated] = [0.3, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [2.3, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietarySugar] = [2.0, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryProtein] = [24.0, "g"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [0.6, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [400.0, "mg"]
         
-        let samples = buildSamplesList(list, title, startTime, endTime)
-        
-        let foodType: HKCorrelationType = HKObjectType.correlationType(forIdentifier: .food)!
-        let foodMetadata: [String: String]? = [HKMetadataKeyFoodType: title]
-        
-        let foodCorrelation : HKCorrelation = HKCorrelation(
-            type: foodType,
-            start: startTime as Date,
-            end: endTime as Date,
-            objects: NSSet(array: samples) as! Set<HKSample>,
-            metadata: foodMetadata
-        )
-        
-        healthStore.save(foodCorrelation, withCompletion: { (success, error) -> Void in
-            if( error != nil ) {
-                print(error ?? "error!")
-            }
-        })
+        saveFoodSample(samplesList, 60, "Weider protein")
+
     }
+    
+
+    func savePill() -> Void {
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminA] = [800.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminD] = [5.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminE] = [12.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminK] = [25.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryThiamin] = [3.3, "mg"] //b1
+        samplesList[HKQuantityTypeIdentifier.dietaryRiboflavin] = [4.2, "mg"] //b2
+        samplesList[HKQuantityTypeIdentifier.dietaryNiacin] = [48.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryPantothenicAcid] = [18.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [2.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryFolate] = [200.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB12] = [3.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryBiotin] = [50.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryVitaminC] = [180.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [120.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [80.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryIron] = [14.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryCopper] = [1.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryIodine] = [150.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryZinc] = [10.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryManganese] = [2.0, "mg"]
+        samplesList[HKQuantityTypeIdentifier.dietarySelenium] = [50.0, "mcg"]
+        samplesList[HKQuantityTypeIdentifier.dietaryMolybdenum] = [50.0, "mcg"]
+        
+        saveFoodSample(samplesList, 60, "Supradin pill")
+        
+    }
+    
     
     func saveHandStand() -> Void {
         let duration = 30 //seconds
@@ -550,6 +494,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveSex() -> Void {
+        let duration = 600 //seconds
         let sexualActivity = HKCategoryType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sexualActivity)
         let metadata: [String: String]? = [HKMetadataKeySexualActivityProtectionUsed: "NO"]
 
@@ -558,7 +503,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let sexSample = HKCategorySample(
             type: sexualActivity!,
             value: HKCategoryValue.notApplicable.rawValue,
-            start: endTime.addingTimeInterval(-600) as Date,
+            start: endTime.addingTimeInterval(TimeInterval(-duration)) as Date,
             end: endTime as Date,
             metadata: metadata
         )
@@ -569,10 +514,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         })
 
-        let list = [
-            [HKQuantityTypeIdentifier.activeEnergyBurned, 42.0, "kcal"], //252 kcal/hour
-            ]
-        processData(list, "Sex")
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[HKQuantityTypeIdentifier.activeEnergyBurned] = [42.0, "kcal"]
+        saveFoodSample(samplesList, duration, "Sex")
+
     }
     
     func saveSitUps() -> Void {
@@ -766,51 +711,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-
-    func savePill() -> Void {
-        let list = [
-            [HKQuantityTypeIdentifier.dietaryVitaminA, 800.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryVitaminD, 5.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryVitaminE, 12.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryVitaminK, 25.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryThiamin, 3.3, "mg"], //b1
-            [HKQuantityTypeIdentifier.dietaryRiboflavin, 4.2, "mg"], //b2
-            [HKQuantityTypeIdentifier.dietaryNiacin, 48.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryPantothenicAcid, 18.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryVitaminB6, 2.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryFolate, 200.0, "mcg"]
-        ]
-        
-        let list2 = [
-            [HKQuantityTypeIdentifier.dietaryVitaminB12, 3.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryBiotin, 50.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryVitaminC, 180.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryCalcium, 120.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryMagnesium, 80.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryIron, 14.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryCopper, 1.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryIodine, 150.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryZinc, 10.0, "mg"],
-            [HKQuantityTypeIdentifier.dietaryManganese, 2.0, "mg"],
-            [HKQuantityTypeIdentifier.dietarySelenium, 50.0, "mcg"],
-            [HKQuantityTypeIdentifier.dietaryMolybdenum, 50.0, "mcg"]
-        ]
-        
-        processData(list, "Supradin pill")
-        processData(list2, "Supradin pill")
-        
-    }
-    
-    
-    func buildSamplesList(_ list: [[Any]], _ title: String, _ start: NSDate, _ end: NSDate) -> [HKSample] {
+  
+    func buildSamplesList(_ list: [HKQuantityTypeIdentifier: Array<Any>], _ title: String, _ start: NSDate, _ end: NSDate) -> [HKSample] {
         var samplesArray = [HKSample]()
-
-        for item in list {
-            guard let quantityType = HKObjectType.quantityType(forIdentifier: item[0] as! HKQuantityTypeIdentifier) else {
+        for (identifier, item) in list {
+            guard let quantityType = HKObjectType.quantityType(forIdentifier: identifier) else {
                 continue
             }
-            let unit = HKUnit(from: item[2] as! String)
-            let quantity = HKQuantity(unit: unit, doubleValue: item[1] as! Double)
+            let unit = HKUnit(from: item[1] as! String)
+            let quantity = HKQuantity(unit: unit, doubleValue: item[0] as! Double)
             
             let metadata: [String: String]? = ["Title": title]
             
@@ -827,7 +736,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return samplesArray
     }
     
-    func processData(_ list: [[Any]], _ title: String) {
+    func saveFoodSample(_ samplesList: [HKQuantityTypeIdentifier: Array<Any>], _ durationInSeconds: Int, _ title: String) {
+        let endTime = NSDate()
+        let startTime = endTime.addingTimeInterval(TimeInterval(-durationInSeconds))
+        
+        let samples = buildSamplesList(samplesList, title, startTime, endTime)
+        
+        let foodType: HKCorrelationType = HKObjectType.correlationType(forIdentifier: .food)!
+        let foodMetadata: [String: String]? = [HKMetadataKeyFoodType: title]
+        
+        let foodCorrelation : HKCorrelation = HKCorrelation(
+            type: foodType,
+            start: startTime as Date,
+            end: endTime as Date,
+            objects: NSSet(array: samples) as! Set<HKSample>,
+            metadata: foodMetadata
+        )
+        
+        healthStore.save(foodCorrelation, withCompletion: { (success, error) -> Void in
+            if( error != nil ) {
+                print(error ?? "error!")
+            }
+        })
+    }
+    
+    func processData(_ list: [HKQuantityTypeIdentifier: Array<Any>], _ title: String) {
         let samplesArray = buildSamplesList(list, title, NSDate(), NSDate())
         
         for sample in samplesArray {
@@ -838,8 +771,5 @@ class ViewController: UIViewController, UITextFieldDelegate {
             })
         }
     }
-    
-
-
 }
 
