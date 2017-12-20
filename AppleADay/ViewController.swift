@@ -150,55 +150,55 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func saveEspresso() -> Void {
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [3.0, "kcal"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [0.5, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [34.5, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [24.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatTotal] = [0.1, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCaffeine] = [63.6, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietarySodium] = [4.2, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [30.0, "mL"]
+        samplesList[.dietaryEnergyConsumed] = [3.0, "kcal"]
+        samplesList[.dietaryCarbohydrates] = [0.5, "g"]
+        samplesList[.dietaryPotassium] = [34.5, "mg"]
+        samplesList[.dietaryMagnesium] = [24.0, "mg"]
+        samplesList[.dietaryFatTotal] = [0.1, "g"]
+        samplesList[.dietaryCaffeine] = [63.6, "mg"]
+        samplesList[.dietarySodium] = [4.2, "mg"]
+        samplesList[.dietaryWater] = [30.0, "mL"]
         
         saveFoodSample(samplesList, 60, "Espresso")
     }
     
     func saveWater() -> Void {
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [200.0, "mL"]
+        samplesList[.dietaryWater] = [200.0, "mL"]
         saveFoodSample(samplesList, 60, "200 ml of water")
     }
     
     func saveTea() -> Void {
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [340.0, " mL"]
-        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [3.4, "kcal"]
-        samplesList[HKQuantityTypeIdentifier.dietarySodium] = [3.4 * 4, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [3.4 * 18.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [3.4 * 0.2, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryProtein] = [3.4 * 0.1, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCaffeine] = [3.4 * 11, "mg"]
+        samplesList[.dietaryWater] = [340.0, " mL"]
+        samplesList[.dietaryEnergyConsumed] = [3.4, "kcal"]
+        samplesList[.dietarySodium] = [3.4 * 4, "mg"]
+        samplesList[.dietaryPotassium] = [3.4 * 18.0, "mg"]
+        samplesList[.dietaryCarbohydrates] = [3.4 * 0.2, "g"]
+        samplesList[.dietaryProtein] = [3.4 * 0.1, "g"]
+        samplesList[.dietaryCaffeine] = [3.4 * 11, "mg"]
         
         saveFoodSample(samplesList, 60, "Tea")
     }
     
     func saveApple() -> Void {
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [47.0, "kcal"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatTotal] = [0.3, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatSaturated] = [0.1, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatPolyunsaturated] = [0.1, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [25.0, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFiber] = [4.4, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietarySugar] = [19.0, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryProtein] = [0.5, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietarySodium] = [1.8, "mg"] //Na
-        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [194.7, "mg"] //K
-        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [9.1, "mg"] //Mg
-        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [10.9, "mg"] //Ca
-        samplesList[HKQuantityTypeIdentifier.dietaryIron] = [0.2, "mg"] //Fe
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [0.1, "mg"] //B6
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminC] = [8.4, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [156.0, "mL"]
+        samplesList[.dietaryEnergyConsumed] = [47.0, "kcal"]
+        samplesList[.dietaryFatTotal] = [0.3, "g"]
+        samplesList[.dietaryFatSaturated] = [0.1, "g"]
+        samplesList[.dietaryFatPolyunsaturated] = [0.1, "g"]
+        samplesList[.dietaryCarbohydrates] = [25.0, "g"]
+        samplesList[.dietaryFiber] = [4.4, "g"]
+        samplesList[.dietarySugar] = [19.0, "g"]
+        samplesList[.dietaryProtein] = [0.5, "g"]
+        samplesList[.dietarySodium] = [1.8, "mg"] //Na
+        samplesList[.dietaryPotassium] = [194.7, "mg"] //K
+        samplesList[.dietaryMagnesium] = [9.1, "mg"] //Mg
+        samplesList[.dietaryCalcium] = [10.9, "mg"] //Ca
+        samplesList[.dietaryIron] = [0.2, "mg"] //Fe
+        samplesList[.dietaryVitaminB6] = [0.1, "mg"] //B6
+        samplesList[.dietaryVitaminC] = [8.4, "mg"]
+        samplesList[.dietaryWater] = [156.0, "mL"]
         
         saveFoodSample(samplesList, 60, "Apple")
     }
@@ -206,28 +206,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
     /* 100 ml of granat joice */
     func saveGranat() -> Void {
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [56.0, "kcal"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatTotal] = [1.2, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatSaturated] = [0.1, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatPolyunsaturated] = [0.1, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatMonounsaturated] = [0.1, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFiber] = [4.0, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietarySugar] = [14.0, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryProtein] = [1.7, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [19.0, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietarySodium] = [4.0, "mg"] //Na
-        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [102.0, "mg"] //K
-        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [5.0, "mg"] //Mg
-        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [12.0, "mg"] //Ca
-        samplesList[HKQuantityTypeIdentifier.dietaryPhosphorus] = [8.0, "mg"] //P
-        samplesList[HKQuantityTypeIdentifier.dietaryIron] = [1.0, "mg"] //Fe
-        samplesList[HKQuantityTypeIdentifier.dietaryThiamin] = [0.04, "mg"] //B1
-        samplesList[HKQuantityTypeIdentifier.dietaryRiboflavin] = [0.1, "mg"] //B2
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [0.4, "mg"] //B6
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB12] = [0.31, "mg"] //B12
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminC] = [4.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryNiacin] = [1.5, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryWater] = [100.0, "mL"]
+        samplesList[.dietaryEnergyConsumed] = [56.0, "kcal"]
+        samplesList[.dietaryFatTotal] = [1.2, "g"]
+        samplesList[.dietaryFatSaturated] = [0.1, "g"]
+        samplesList[.dietaryFatPolyunsaturated] = [0.1, "g"]
+        samplesList[.dietaryFatMonounsaturated] = [0.1, "g"]
+        samplesList[.dietaryFiber] = [4.0, "g"]
+        samplesList[.dietarySugar] = [14.0, "g"]
+        samplesList[.dietaryProtein] = [1.7, "g"]
+        samplesList[.dietaryCarbohydrates] = [19.0, "g"]
+        samplesList[.dietarySodium] = [4.0, "mg"] //Na
+        samplesList[.dietaryPotassium] = [102.0, "mg"] //K
+        samplesList[.dietaryMagnesium] = [5.0, "mg"] //Mg
+        samplesList[.dietaryCalcium] = [12.0, "mg"] //Ca
+        samplesList[.dietaryPhosphorus] = [8.0, "mg"] //P
+        samplesList[.dietaryIron] = [1.0, "mg"] //Fe
+        samplesList[.dietaryThiamin] = [0.04, "mg"] //B1
+        samplesList[.dietaryRiboflavin] = [0.1, "mg"] //B2
+        samplesList[.dietaryVitaminB6] = [0.4, "mg"] //B6
+        samplesList[.dietaryVitaminB12] = [0.31, "mg"] //B12
+        samplesList[.dietaryVitaminC] = [4.0, "mg"]
+        samplesList[.dietaryNiacin] = [1.5, "mg"]
+        samplesList[.dietaryWater] = [100.0, "mL"]
         
         saveFoodSample(samplesList, 60, "Granat juice")
         
@@ -236,25 +236,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
     /* 100 ml of granat joice */
     func saveMultiVitaminMuscleTech() -> Void {
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminA] = [6.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminC] = [135.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminD] = [10.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminE] = [81.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryThiamin] = [20.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryRiboflavin] = [13.5, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryNiacin] = [60.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [10.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFolate] = [300.0, "mcg"] //folic acid
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB12] = [100.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryBiotin] = [165.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryPantothenicAcid] = [80.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [152.0, "mg"] //Ca
-        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [145.0, "mg"] //Mg
-        samplesList[HKQuantityTypeIdentifier.dietaryZinc] = [9.5, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCopper] = [1.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryManganese] = [7.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryMolybdenum] = [10.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryPotassium] = [35.0, "mg"]
+        samplesList[.dietaryVitaminA] = [6.0, "mg"]
+        samplesList[.dietaryVitaminC] = [135.0, "mg"]
+        samplesList[.dietaryVitaminD] = [10.0, "mcg"]
+        samplesList[.dietaryVitaminE] = [81.0, "mg"]
+        samplesList[.dietaryThiamin] = [20.0, "mg"]
+        samplesList[.dietaryRiboflavin] = [13.5, "mg"]
+        samplesList[.dietaryNiacin] = [60.0, "mg"]
+        samplesList[.dietaryVitaminB6] = [10.0, "mg"]
+        samplesList[.dietaryFolate] = [300.0, "mcg"] //folic acid
+        samplesList[.dietaryVitaminB12] = [100.0, "mcg"]
+        samplesList[.dietaryBiotin] = [165.0, "mcg"]
+        samplesList[.dietaryPantothenicAcid] = [80.0, "mg"]
+        samplesList[.dietaryCalcium] = [152.0, "mg"] //Ca
+        samplesList[.dietaryMagnesium] = [145.0, "mg"] //Mg
+        samplesList[.dietaryZinc] = [9.5, "mg"]
+        samplesList[.dietaryCopper] = [1.0, "mg"]
+        samplesList[.dietaryManganese] = [7.0, "mg"]
+        samplesList[.dietaryMolybdenum] = [10.0, "mcg"]
+        samplesList[.dietaryPotassium] = [35.0, "mg"]
         
         saveFoodSample(samplesList, 60, "Mutli-vitamins")
     }
@@ -263,14 +263,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func saveWeiderProtein() -> Void {
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[HKQuantityTypeIdentifier.dietaryEnergyConsumed] = [110.0, "kcal"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatTotal] = [0.5, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFatSaturated] = [0.3, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCarbohydrates] = [2.3, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietarySugar] = [2.0, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryProtein] = [24.0, "g"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [0.6, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [400.0, "mg"]
+        samplesList[.dietaryEnergyConsumed] = [110.0, "kcal"]
+        samplesList[.dietaryFatTotal] = [0.5, "g"]
+        samplesList[.dietaryFatSaturated] = [0.3, "g"]
+        samplesList[.dietaryCarbohydrates] = [2.3, "g"]
+        samplesList[.dietarySugar] = [2.0, "g"]
+        samplesList[.dietaryProtein] = [24.0, "g"]
+        samplesList[.dietaryVitaminB6] = [0.6, "mg"]
+        samplesList[.dietaryCalcium] = [400.0, "mg"]
         
         saveFoodSample(samplesList, 60, "Weider protein")
 
@@ -279,28 +279,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     func savePill() -> Void {
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminA] = [800.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminD] = [5.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminE] = [12.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminK] = [25.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryThiamin] = [3.3, "mg"] //b1
-        samplesList[HKQuantityTypeIdentifier.dietaryRiboflavin] = [4.2, "mg"] //b2
-        samplesList[HKQuantityTypeIdentifier.dietaryNiacin] = [48.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryPantothenicAcid] = [18.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB6] = [2.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryFolate] = [200.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminB12] = [3.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryBiotin] = [50.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryVitaminC] = [180.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCalcium] = [120.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryMagnesium] = [80.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryIron] = [14.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryCopper] = [1.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryIodine] = [150.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryZinc] = [10.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryManganese] = [2.0, "mg"]
-        samplesList[HKQuantityTypeIdentifier.dietarySelenium] = [50.0, "mcg"]
-        samplesList[HKQuantityTypeIdentifier.dietaryMolybdenum] = [50.0, "mcg"]
+        samplesList[.dietaryVitaminA] = [800.0, "mcg"]
+        samplesList[.dietaryVitaminD] = [5.0, "mcg"]
+        samplesList[.dietaryVitaminE] = [12.0, "mg"]
+        samplesList[.dietaryVitaminK] = [25.0, "mcg"]
+        samplesList[.dietaryThiamin] = [3.3, "mg"] //b1
+        samplesList[.dietaryRiboflavin] = [4.2, "mg"] //b2
+        samplesList[.dietaryNiacin] = [48.0, "mg"]
+        samplesList[.dietaryPantothenicAcid] = [18.0, "mg"]
+        samplesList[.dietaryVitaminB6] = [2.0, "mg"]
+        samplesList[.dietaryFolate] = [200.0, "mcg"]
+        samplesList[.dietaryVitaminB12] = [3.0, "mcg"]
+        samplesList[.dietaryBiotin] = [50.0, "mcg"]
+        samplesList[.dietaryVitaminC] = [180.0, "mg"]
+        samplesList[.dietaryCalcium] = [120.0, "mg"]
+        samplesList[.dietaryMagnesium] = [80.0, "mg"]
+        samplesList[.dietaryIron] = [14.0, "mg"]
+        samplesList[.dietaryCopper] = [1.0, "mg"]
+        samplesList[.dietaryIodine] = [150.0, "mcg"]
+        samplesList[.dietaryZinc] = [10.0, "mg"]
+        samplesList[.dietaryManganese] = [2.0, "mg"]
+        samplesList[.dietarySelenium] = [50.0, "mcg"]
+        samplesList[.dietaryMolybdenum] = [50.0, "mcg"]
         
         saveFoodSample(samplesList, 60, "Supradin pill")
         
@@ -332,7 +332,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var samples: [HKQuantitySample] = []
             
             let energyBurnedType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+                forIdentifier: .activeEnergyBurned
             )
             let energyBurnedPerIntervalSample = HKQuantitySample(
                 type: energyBurnedType!,
@@ -378,7 +378,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var samples: [HKQuantitySample] = []
             
             let energyBurnedType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+                forIdentifier: .activeEnergyBurned
             )
             let energyBurnedPerIntervalSample = HKQuantitySample(
                 type: energyBurnedType!,
@@ -424,7 +424,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var samples: [HKQuantitySample] = []
             
             let energyBurnedType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+                forIdentifier: .activeEnergyBurned
             )
             let energyBurnedPerIntervalSample = HKQuantitySample(
                 type: energyBurnedType!,
@@ -472,7 +472,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var samples: [HKQuantitySample] = []
             
             let energyBurnedType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+                forIdentifier: .activeEnergyBurned
             )
             let energyBurnedPerIntervalSample = HKQuantitySample(
                 type: energyBurnedType!,
@@ -515,7 +515,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         })
 
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[HKQuantityTypeIdentifier.activeEnergyBurned] = [42.0, "kcal"]
+        samplesList[.activeEnergyBurned] = [42.0, "kcal"]
         saveFoodSample(samplesList, duration, "Sex")
 
     }
@@ -545,7 +545,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var samples: [HKQuantitySample] = []
             
             let energyBurnedType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+                forIdentifier: .activeEnergyBurned
             )
             let energyBurnedPerIntervalSample = HKQuantitySample(
                 type: energyBurnedType!,
@@ -597,7 +597,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var samples: [HKQuantitySample] = []
             
             let distanceType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning
+                forIdentifier: .distanceWalkingRunning
             )
             let distancePerIntervalSample = HKQuantitySample(
                 type: distanceType!,
@@ -608,7 +608,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             samples.append(distancePerIntervalSample)
             
             let energyBurnedType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+                forIdentifier: .activeEnergyBurned
             )
             let energyBurnedPerIntervalSample = HKQuantitySample(
                 type: energyBurnedType!,
@@ -619,7 +619,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             samples.append(energyBurnedPerIntervalSample)
             
             let flightsType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.flightsClimbed
+                forIdentifier: .flightsClimbed
             )
             let oneFloorUp = HKQuantitySample(
                 type: flightsType!,
@@ -674,7 +674,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var samples: [HKQuantitySample] = []
             
             let distanceType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.distanceSwimming
+                forIdentifier: .distanceSwimming
             )
             
             let distancePerIntervalSample = HKQuantitySample(
@@ -687,7 +687,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             samples.append(distancePerIntervalSample)
             
             let energyBurnedType = HKObjectType.quantityType(
-                forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned
+                forIdentifier: .activeEnergyBurned
             )
             
             let energyBurnedPerIntervalSample = HKQuantitySample(
