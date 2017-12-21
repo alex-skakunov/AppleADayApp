@@ -771,5 +771,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             })
         }
     }
+
+    func saveWorkout(_ type: HKWorkoutActivityType, _ samplesList: [HKQuantityTypeIdentifier: Array<Any>]) {
+
+    }
 }
 
