@@ -567,20 +567,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
 
-    func saveStairsClimbing() -> Void {
-        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 0.883)
-        let distance = HKQuantity(unit: HKUnit.meter(), doubleValue: 7.0)
+    func saveWorkout(_ type: HKWorkoutActivityType, _ durationInSeconds: Int, _ title: String, _ samplesList: [HKQuantityTypeIdentifier: Array<Any>], _ metadata: [String: Any]) {
+        
         let endTime = NSDate()
-        let startTime = endTime.addingTimeInterval(-30) as Date
-        var metadata: [String: Any] = [HKMetadataKeyIndoorWorkout: true]
+        let startTime = endTime.addingTimeInterval(TimeInterval(-durationInSeconds))
+        
+        //let samples = buildSamplesList(samplesList, title, startTime, endTime)
 
-        if #available(iOS 11.2, *) {
-            let elevation = HKQuantity(unit: HKUnit.meter(), doubleValue: 3.0)
-            metadata[HKMetadataKeyElevationAscended] = elevation
-        }
+        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 0.883) //XXX
+        let distance = HKQuantity(unit: HKUnit.meter(), doubleValue: 7.0) //XXX
         let workout = HKWorkout(
-            activityType: HKWorkoutActivityType.stairs,
-            start: startTime,
+            activityType: type,
+            start: startTime as Date,
             end: endTime as Date,
             duration: 30,
             totalEnergyBurned: energyBurned,
@@ -596,38 +594,44 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             var samples: [HKQuantitySample] = []
             
-            let distanceType = HKObjectType.quantityType(
-                forIdentifier: .distanceWalkingRunning
-            )
-            let distancePerIntervalSample = HKQuantitySample(
-                type: distanceType!,
-                quantity: distance,
-                start: startTime,
-                end: endTime as Date
-            )
-            samples.append(distancePerIntervalSample)
+            if ((samplesList[.distanceWalkingRunning]) != nil) {
+                let distanceType = HKObjectType.quantityType(
+                    forIdentifier: .distanceWalkingRunning
+                )
+                let distancePerIntervalSample = HKQuantitySample(
+                    type: distanceType!,
+                    quantity: distance,
+                    start: startTime as Date,
+                    end: endTime as Date
+                )
+                samples.append(distancePerIntervalSample)
+            }
             
-            let energyBurnedType = HKObjectType.quantityType(
-                forIdentifier: .activeEnergyBurned
-            )
-            let energyBurnedPerIntervalSample = HKQuantitySample(
-                type: energyBurnedType!,
-                quantity: energyBurned,
-                start: startTime,
-                end: endTime as Date
-            )
-            samples.append(energyBurnedPerIntervalSample)
+            if ((samplesList[.activeEnergyBurned]) != nil) {
+                let energyBurnedType = HKObjectType.quantityType(
+                    forIdentifier: .activeEnergyBurned
+                )
+                let energyBurnedPerIntervalSample = HKQuantitySample(
+                    type: energyBurnedType!,
+                    quantity: energyBurned,
+                    start: startTime as Date,
+                    end: endTime as Date
+                )
+                samples.append(energyBurnedPerIntervalSample)
+            }
             
-            let flightsType = HKObjectType.quantityType(
-                forIdentifier: .flightsClimbed
-            )
-            let oneFloorUp = HKQuantitySample(
-                type: flightsType!,
-                quantity: HKQuantity(unit: HKUnit.count(), doubleValue: 1.0),
-                start: startTime,
-                end: endTime as Date
-            )
-            samples.append(oneFloorUp)
+            if ((samplesList[.flightsClimbed]) != nil) {
+                let flightsType = HKObjectType.quantityType(
+                    forIdentifier: .flightsClimbed
+                )
+                let oneFloorUp = HKQuantitySample(
+                    type: flightsType!,
+                    quantity: HKQuantity(unit: HKUnit.count(), doubleValue: 1.0),
+                    start: startTime as Date,
+                    end: endTime as Date
+                )
+                samples.append(oneFloorUp)
+            }
             
             self.healthStore.add(
                 samples,
@@ -638,6 +642,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     }
             }
         }
+    }
+
+    func saveStairsClimbing() -> Void {
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        samplesList[.activeEnergyBurned] = [0.883, "kcal"]
+        samplesList[.distanceWalkingRunning] = [3.0, "meter"]
+        samplesList[.flightsClimbed] = [1.0, "counts"]
+
+        var metadata: [String: Any] = [HKMetadataKeyIndoorWorkout: true]
+        
+        if #available(iOS 11.2, *) {
+            let elevation = HKQuantity(unit: HKUnit.meter(), doubleValue: 3.0)
+            metadata[HKMetadataKeyElevationAscended] = elevation
+        }
+
+        saveWorkout(.stairs, 30, "Stairs", samplesList, metadata)
     }
     
     @available(iOS 10.0, *)
@@ -770,10 +790,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
             })
         }
-    }
-
-    func saveWorkout(_ type: HKWorkoutActivityType, _ samplesList: [HKQuantityTypeIdentifier: Array<Any>]) {
-
     }
 }
 
