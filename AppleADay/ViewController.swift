@@ -516,7 +516,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
         samplesList[.activeEnergyBurned] = [42.0, "kcal"]
-        saveFoodSample(samplesList, duration, "Sex")
+        processData(samplesList, "Sex")
 
     }
     
@@ -567,22 +567,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
 
-    func saveWorkout(_ type: HKWorkoutActivityType, _ durationInSeconds: Int, _ title: String, _ samplesList: [HKQuantityTypeIdentifier: Array<Any>], _ metadata: [String: Any]) {
+    func saveWorkout(type: HKWorkoutActivityType, durationInSeconds: Int, title: String, samplesList: [HKQuantityTypeIdentifier: Array<Any>], _ metadata: [String: Any]) {
         
         let endTime = NSDate()
         let startTime = endTime.addingTimeInterval(TimeInterval(-durationInSeconds))
         
-        //let samples = buildSamplesList(samplesList, title, startTime, endTime)
+        let samples = buildIndexedSamplesList(samplesList, title, startTime, endTime)
 
-        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: 0.883) //XXX
-        let distance = HKQuantity(unit: HKUnit.meter(), doubleValue: 7.0) //XXX
+        let energyBurned = samples[.activeEnergyBurned] != nil ? samples[.activeEnergyBurned] : nil;
+        let distance = samples[.distanceWalkingRunning] != nil ? samples[.distanceWalkingRunning] : nil;
         let workout = HKWorkout(
             activityType: type,
             start: startTime as Date,
             end: endTime as Date,
-            duration: 30,
-            totalEnergyBurned: energyBurned,
-            totalDistance: distance,
+            duration: TimeInterval(durationInSeconds),
+            totalEnergyBurned: energyBurned != nil ? energyBurned?.quantity : nil,
+            totalDistance: distance != nil ? distance?.quantity : nil,
             metadata: metadata
         )
         
@@ -591,50 +591,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print(error ?? "error!")
                 return;
             }
-            
-            var samples: [HKQuantitySample] = []
-            
-            if ((samplesList[.distanceWalkingRunning]) != nil) {
-                let distanceType = HKObjectType.quantityType(
-                    forIdentifier: .distanceWalkingRunning
-                )
-                let distancePerIntervalSample = HKQuantitySample(
-                    type: distanceType!,
-                    quantity: distance,
-                    start: startTime as Date,
-                    end: endTime as Date
-                )
-                samples.append(distancePerIntervalSample)
+        
+            var flatSamples = [HKQuantitySample]()
+            for (_, sample) in samples {
+                flatSamples.append(sample)
             }
-            
-            if ((samplesList[.activeEnergyBurned]) != nil) {
-                let energyBurnedType = HKObjectType.quantityType(
-                    forIdentifier: .activeEnergyBurned
-                )
-                let energyBurnedPerIntervalSample = HKQuantitySample(
-                    type: energyBurnedType!,
-                    quantity: energyBurned,
-                    start: startTime as Date,
-                    end: endTime as Date
-                )
-                samples.append(energyBurnedPerIntervalSample)
-            }
-            
-            if ((samplesList[.flightsClimbed]) != nil) {
-                let flightsType = HKObjectType.quantityType(
-                    forIdentifier: .flightsClimbed
-                )
-                let oneFloorUp = HKQuantitySample(
-                    type: flightsType!,
-                    quantity: HKQuantity(unit: HKUnit.count(), doubleValue: 1.0),
-                    start: startTime as Date,
-                    end: endTime as Date
-                )
-                samples.append(oneFloorUp)
-            }
-            
+
             self.healthStore.add(
-                samples,
+                flatSamples,
                 to: workout) { (success, error) -> Void in
                     if( error != nil ) {
                         print(error ?? "error!")
@@ -647,8 +611,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func saveStairsClimbing() -> Void {
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
         samplesList[.activeEnergyBurned] = [0.883, "kcal"]
-        samplesList[.distanceWalkingRunning] = [3.0, "meter"]
-        samplesList[.flightsClimbed] = [1.0, "counts"]
+        samplesList[.distanceWalkingRunning] = [3.0, "m"]
+        samplesList[.flightsClimbed] = [1.0, "count"]
 
         var metadata: [String: Any] = [HKMetadataKeyIndoorWorkout: true]
         
@@ -657,7 +621,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             metadata[HKMetadataKeyElevationAscended] = elevation
         }
 
-        saveWorkout(.stairs, 30, "Stairs", samplesList, metadata)
+        saveWorkout(type: .stairs, durationInSeconds: 30, title: "Stairs", samplesList: samplesList, metadata)
     }
     
     @available(iOS 10.0, *)
@@ -754,6 +718,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
             samplesArray.append(sample);
         }
         return samplesArray
+    }
+    
+    func buildIndexedSamplesList(_ list: [HKQuantityTypeIdentifier: Array<Any>], _ title: String, _ start: NSDate, _ end: NSDate) -> [HKQuantityTypeIdentifier: HKQuantitySample] {
+        var result = [HKQuantityTypeIdentifier: HKQuantitySample]()
+        
+        for (identifier, item) in list {
+            guard let quantityType = HKObjectType.quantityType(forIdentifier: identifier) else {
+                continue
+            }
+            let unit = HKUnit(from: item[1] as! String)
+            let quantity = HKQuantity(unit: unit, doubleValue: item[0] as! Double)
+            
+            let metadata: [String: String]? = ["Title": title]
+            
+            let sample = HKQuantitySample(
+                type: quantityType,
+                quantity: quantity,
+                start: start as Date,
+                end: end as Date,
+                metadata: metadata
+            )
+            
+            result[identifier] = sample
+        }
+        return result
     }
     
     func saveFoodSample(_ samplesList: [HKQuantityTypeIdentifier: Array<Any>], _ durationInSeconds: Int, _ title: String) {
