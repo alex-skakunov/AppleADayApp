@@ -14,7 +14,11 @@ import HealthKit
 class ViewController: UIViewController, UITextFieldDelegate {
     //MARK: Properties
     
+    @IBOutlet weak var stairsClimbingLabel: UILabel!
+    
     let healthStore = HKHealthStore()
+    
+    var timersList = [String: Date]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,9 +71,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             savePill() //"Супрадин"
         }
         
-        Alert(title: "Success",
+        if (sender.currentTitle! != "stairs-climbing") {
+            Alert(title: "Success",
               message: "The " + sender.currentTitle! + " was recorded in Apple Health",
               buttonText: "OK");
+        }
     }
     
     func getHealthKitPermission() {
@@ -586,7 +592,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let startTime = endTime.addingTimeInterval(TimeInterval(-durationInSeconds))
         
         let samples = buildIndexedSamplesList(samplesList, title, startTime, endTime)
-
+        
         let energyBurned = samples[.activeEnergyBurned] != nil ? samples[.activeEnergyBurned] : nil;
         let distance = samples[.distanceWalkingRunning] != nil ? samples[.distanceWalkingRunning] : nil;
         let workout = HKWorkout(
@@ -604,12 +610,52 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print(error ?? "error!")
                 return;
             }
-        
+            
             var flatSamples = [HKQuantitySample]()
             for (_, sample) in samples {
                 flatSamples.append(sample)
             }
+            
+            self.healthStore.add(
+                flatSamples,
+                to: workout) { (success, error) -> Void in
+                    if( error != nil ) {
+                        print(error ?? "error!")
+                        return;
+                    }
+            }
+        }
+    }
 
+    
+    func saveContinuousWorkout(type: HKWorkoutActivityType, startDate: Date, endDate: Date,  title: String, samplesList: [HKQuantityTypeIdentifier: Array<Any>], _ metadata: [String: Any]) {
+        let di = DateInterval(start: startDate, end: endDate);
+        
+        let samples = buildIndexedSamplesList(samplesList, title, startDate as NSDate, endDate as NSDate)
+        
+        let energyBurned = samples[.activeEnergyBurned] != nil ? samples[.activeEnergyBurned] : nil;
+        let distance = samples[.distanceWalkingRunning] != nil ? samples[.distanceWalkingRunning] : nil;
+        let workout = HKWorkout(
+            activityType: type,
+            start: startDate,
+            end: endDate,
+            duration: di.duration,
+            totalEnergyBurned: energyBurned != nil ? energyBurned?.quantity : nil,
+            totalDistance: distance != nil ? distance?.quantity : nil,
+            metadata: metadata
+        )
+        
+        healthStore.save(workout) { (success, error) in
+            if( error != nil ) {
+                print(error ?? "error!")
+                return;
+            }
+            
+            var flatSamples = [HKQuantitySample]()
+            for (_, sample) in samples {
+                flatSamples.append(sample)
+            }
+            
             self.healthStore.add(
                 flatSamples,
                 to: workout) { (success, error) -> Void in
@@ -622,19 +668,50 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     func saveStairsClimbing() -> Void {
-        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[.activeEnergyBurned] = [0.883, "kcal"]
-        samplesList[.distanceWalkingRunning] = [3.0, "m"]
-        samplesList[.flightsClimbed] = [1.0, "count"]
-
-        var metadata: [String: Any] = [HKMetadataKeyIndoorWorkout: true]
-        
-        if #available(iOS 11.2, *) {
-            let elevation = HKQuantity(unit: HKUnit.meter(), doubleValue: 3.0)
-            metadata[HKMetadataKeyElevationAscended] = elevation
+        if (nil == timersList["StairsClimbing"]) {
+            timersList["StairsClimbing"] = Date()
+            stairsClimbingLabel.text = "ON"
+            return
         }
-
-        saveWorkout(type: .stairs, durationInSeconds: 30, title: "Stairs", samplesList: samplesList, metadata)
+        
+        stairsClimbingLabel.text = ""
+        let startDate = timersList["StairsClimbing"]
+        timersList["StairsClimbing"] = nil
+        let endDate = Date()
+        var floorsCount:Int = 0
+        
+        showInputDialog(title: "Floors",
+                        subtitle: "Please enter the floors count.",
+                        actionTitle: "Count this",
+                        cancelTitle: "Cancel",
+                        inputPlaceholder: "Floors",
+                        inputKeyboardType: UIKeyboardType.numberPad)
+        {
+            (floorsCountString:String?) in
+                print("The new number is \(floorsCountString ?? "")")
+                floorsCount = Int(floorsCountString!)!
+                if (0 == floorsCount) {
+                    print("Floors count is 0")
+                    return
+                }
+            
+                let components = Calendar.current.dateComponents([.second], from: startDate!, to: endDate)
+            
+                let timeInHours:Double = Double(components.second!) / 3600.0
+                var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+                samplesList[.activeEnergyBurned] = [265.0 * timeInHours, "kcal"]
+                samplesList[.distanceWalkingRunning] = [7.0 * Double(floorsCount), "m"]
+                samplesList[.flightsClimbed] = [Double(floorsCount), "count"]
+            
+                var metadata: [String: Any] = [HKMetadataKeyIndoorWorkout: true]
+            
+                if #available(iOS 11.2, *) {
+                    let elevation = HKQuantity(unit: HKUnit.meter(), doubleValue: 3.0 * Double(floorsCount))
+                    metadata[HKMetadataKeyElevationAscended] = elevation
+                }
+            
+                self.saveContinuousWorkout(type: .stairs, startDate: startDate!, endDate: endDate, title: "Stairs", samplesList: samplesList, metadata)
+        }
     }
     
     @available(iOS 10.0, *)
@@ -792,6 +869,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
             })
         }
+    }
+    
+    func showInputDialog(title:String? = nil,
+                         subtitle:String? = nil,
+                         actionTitle:String? = "Add",
+                         cancelTitle:String? = "Cancel",
+                         inputPlaceholder:String? = nil,
+                         inputKeyboardType:UIKeyboardType = UIKeyboardType.default,
+                         cancelHandler: ((UIAlertAction) -> Swift.Void)? = nil,
+                         actionHandler: ((_ text: String?) -> Void)? = nil) {
+        
+        let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+        alert.addTextField { (textField:UITextField) in
+            textField.placeholder = inputPlaceholder
+            textField.keyboardType = inputKeyboardType
+        }
+        alert.addAction(UIAlertAction(title: actionTitle, style: .destructive, handler: { (action:UIAlertAction) in
+            guard let textField =  alert.textFields?.first else {
+                actionHandler?(nil)
+                return
+            }
+            actionHandler?(textField.text)
+        }))
+        alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelHandler))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
