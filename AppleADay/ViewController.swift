@@ -205,43 +205,44 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     /* 100 ml of granat joice */
     func saveGranat() -> Void {
+        let volume = 0.5
         var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[.dietaryEnergyConsumed] = [0.3 * 83.0, "kcal"]
-        samplesList[.dietaryFatTotal] = [0.3 * 1.2, "g"]
-        samplesList[.dietaryFatSaturated] = [0.3 * 0.1, "g"]
-        samplesList[.dietaryFatPolyunsaturated] = [0.3 * 0.1, "g"]
-        samplesList[.dietaryFatMonounsaturated] = [0.3 * 0.1, "g"]
-        samplesList[.dietarySodium] = [0.3 * 3.0, "mg"] //Na
-        samplesList[.dietaryPotassium] = [0.3 * 236.0, "mg"] //Kalium
-        samplesList[.dietaryCarbohydrates] = [0.3 * 19.0, "g"]
-        samplesList[.dietaryFiber] = [0.3 * 4.0, "g"]
-        samplesList[.dietarySugar] = [0.3 * 14.0, "g"]
-        samplesList[.dietaryProtein] = [0.3 * 1.7, "g"]
-        samplesList[.dietaryCalcium] = [0.3 * 10.0, "mg"] //Ca
-        samplesList[.dietaryVitaminC] = [0.3 * 10.2, "mg"]
-        samplesList[.dietaryIron] = [0.3 * 0.3, "mg"] //Fe
-        samplesList[.dietaryVitaminB6] = [0.3 * 0.1, "mg"] //B6
-        samplesList[.dietaryMagnesium] = [0.3 * 12.0, "mg"] //Mg
+        samplesList[.dietaryEnergyConsumed] = [volume * 83.0, "kcal"]
+        samplesList[.dietaryFatTotal] = [volume * 1.2, "g"]
+        samplesList[.dietaryFatSaturated] = [volume * 0.1, "g"]
+        samplesList[.dietaryFatPolyunsaturated] = [volume * 0.1, "g"]
+        samplesList[.dietaryFatMonounsaturated] = [volume * 0.1, "g"]
+        samplesList[.dietarySodium] = [volume * 3.0, "mg"] //Na
+        samplesList[.dietaryPotassium] = [volume * 236.0, "mg"] //Kalium
+        samplesList[.dietaryCarbohydrates] = [volume * 19.0, "g"]
+        samplesList[.dietaryFiber] = [volume * 4.0, "g"]
+        samplesList[.dietarySugar] = [volume * 14.0, "g"]
+        samplesList[.dietaryProtein] = [volume * 1.7, "g"]
+        samplesList[.dietaryCalcium] = [volume * 10.0, "mg"] //Ca
+        samplesList[.dietaryVitaminC] = [volume * 10.2, "mg"]
+        samplesList[.dietaryIron] = [volume * 0.3, "mg"] //Fe
+        samplesList[.dietaryVitaminB6] = [volume * 0.1, "mg"] //B6
+        samplesList[.dietaryMagnesium] = [volume * 12.0, "mg"] //Mg
         
-        samplesList[.dietaryVitaminE] = [0.3 * 0.6, "mg"]
-        samplesList[.dietaryVitaminK] = [0.3 * 16.4, "mcg"]
-        samplesList[.dietaryThiamin] = [0.3 * 0.1, "mg"] //B1
-        samplesList[.dietaryRiboflavin] = [0.3 * 0.1, "mg"] //B2
-        samplesList[.dietaryNiacin] = [0.3 * 0.3, "mg"]
-        samplesList[.dietaryFolate] = [0.3 * 38.0, "mcg"]
+        samplesList[.dietaryVitaminE] = [volume * 0.6, "mg"]
+        samplesList[.dietaryVitaminK] = [volume * 16.4, "mcg"]
+        samplesList[.dietaryThiamin] = [volume * 0.1, "mg"] //B1
+        samplesList[.dietaryRiboflavin] = [volume * 0.1, "mg"] //B2
+        samplesList[.dietaryNiacin] = [volume * 0.3, "mg"]
+        samplesList[.dietaryFolate] = [volume * 38.0, "mcg"]
         
-        samplesList[.dietaryPhosphorus] = [0.3 * 36.0, "mg"] //P
-        samplesList[.dietaryZinc] = [0.3 * 0.4, "mg"] //P
-        samplesList[.dietaryCopper] = [0.3 * 0.2, "mg"] //P
-        samplesList[.dietaryManganese] = [0.3 * 0.1, "mg"] //P
-        samplesList[.dietarySelenium] = [0.3 * 0.5, "mcg"]
-        samplesList[.dietaryPantothenicAcid] = [0.3 * 0.4, "mg"]
+        samplesList[.dietaryPhosphorus] = [volume * 36.0, "mg"] //P
+        samplesList[.dietaryZinc] = [volume * 0.4, "mg"] //P
+        samplesList[.dietaryCopper] = [volume * 0.2, "mg"] //P
+        samplesList[.dietaryManganese] = [volume * 0.1, "mg"] //P
+        samplesList[.dietarySelenium] = [volume * 0.5, "mcg"]
+        samplesList[.dietaryPantothenicAcid] = [volume * 0.4, "mg"]
         
 //        HKQuantityTypeIdentifier.dietaryPantothenicAcid
         
-        samplesList[.dietaryWater] = [0.3 * 77.9, "mL"]
+        samplesList[.dietaryWater] = [volume * 77.9, "mL"]
         
-        saveFoodSample(samplesList, 30, "Granat juice")
+        saveFoodSample(samplesList, 50, "Granat juice")
         
     }
     
