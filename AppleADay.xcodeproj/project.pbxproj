@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1129EBDF1FC30B02007B5408 /* multi-vitamin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1129EBDE1FC30B01007B5408 /* multi-vitamin.jpg */; };
 		1129EBE11FC31089007B5408 /* weider-protein-80-plus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1129EBE01FC31088007B5408 /* weider-protein-80-plus.jpg */; };
-		114B78801FA4D43A0086BF81 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114B787F1FA4D43A0086BF81 /* HealthKit.framework */; };
 		114B78841FA4D78A0086BF81 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 114B78831FA4D78A0086BF81 /* Images.xcassets */; };
 		114B78861FA4DE0D0086BF81 /* mug.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 114B78851FA4DE0D0086BF81 /* mug.jpg */; };
 		114B788A1FA4E1590086BF81 /* granat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 114B78871FA4E1580086BF81 /* granat.jpg */; };
@@ -31,6 +30,7 @@
 		2C8F40301E1546CE003E9964 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F402E1E1546CE003E9964 /* Main.storyboard */; };
 		2C8F40351E1546CE003E9964 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F40331E1546CE003E9964 /* LaunchScreen.xib */; };
 		2C8F40411E1546CE003E9964 /* AppleADayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F40401E1546CE003E9964 /* AppleADayTests.swift */; };
+		C40B3A7A223BA09500475DF6 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40B3A79223BA09500475DF6 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +46,6 @@
 /* Begin PBXFileReference section */
 		1129EBDE1FC30B01007B5408 /* multi-vitamin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "multi-vitamin.jpg"; path = "assets/multi-vitamin.jpg"; sourceTree = SOURCE_ROOT; };
 		1129EBE01FC31088007B5408 /* weider-protein-80-plus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "weider-protein-80-plus.jpg"; path = "assets/weider-protein-80-plus.jpg"; sourceTree = SOURCE_ROOT; };
-		114B78751FA4D2960086BF81 /* AppleADay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleADay.entitlements; sourceTree = "<group>"; };
-		114B787F1FA4D43A0086BF81 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		114B78831FA4D78A0086BF81 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		114B78851FA4DE0D0086BF81 /* mug.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mug.jpg; path = assets/mug.jpg; sourceTree = SOURCE_ROOT; };
 		114B78871FA4E1580086BF81 /* granat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = granat.jpg; path = assets/granat.jpg; sourceTree = SOURCE_ROOT; };
@@ -73,6 +71,8 @@
 		2C8F403A1E1546CE003E9964 /* AppleADayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleADayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C8F403F1E1546CE003E9964 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C8F40401E1546CE003E9964 /* AppleADayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleADayTests.swift; sourceTree = "<group>"; };
+		C40B3A78223BA09500475DF6 /* AppleADay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleADay.entitlements; sourceTree = "<group>"; };
+		C40B3A79223BA09500475DF6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				114B78801FA4D43A0086BF81 /* HealthKit.framework in Frameworks */,
+				C40B3A7A223BA09500475DF6 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +97,7 @@
 		114B78761FA4D2960086BF81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				114B787F1FA4D43A0086BF81 /* HealthKit.framework */,
+				C40B3A79223BA09500475DF6 /* HealthKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,7 +148,7 @@
 		2C8F40271E1546CE003E9964 /* AppleADay */ = {
 			isa = PBXGroup;
 			children = (
-				114B78751FA4D2960086BF81 /* AppleADay.entitlements */,
+				C40B3A78223BA09500475DF6 /* AppleADay.entitlements */,
 				2C8F402A1E1546CE003E9964 /* AppDelegate.swift */,
 				2C8F402C1E1546CE003E9964 /* ViewController.swift */,
 				2C8F402E1E1546CE003E9964 /* Main.storyboard */,
@@ -238,7 +238,7 @@
 		2C8F401D1E1546CE003E9964 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Zero to Hero";
 				TargetAttributes = {
 					2C8F40241E1546CE003E9964 = {
@@ -254,6 +254,7 @@
 					};
 					2C8F40391E1546CE003E9964 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 3RWML2B9SG;
 						LastSwiftMigration = 0820;
 						TestTargetID = 2C8F40241E1546CE003E9964;
 					};
@@ -261,7 +262,7 @@
 			};
 			buildConfigurationList = 2C8F40201E1546CE003E9964 /* Build configuration list for PBXProject "AppleADay" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -375,12 +376,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -407,7 +410,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -428,12 +431,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -453,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -467,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AppleADay/AppleADay.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3RWML2B9SG;
@@ -475,7 +481,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = zero2hero.AppleADayAppApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -484,6 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AppleADay/AppleADay.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3RWML2B9SG;
 				INFOPLIST_FILE = AppleADay/Info.plist;
@@ -491,7 +500,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = zero2hero.AppleADayAppApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -499,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 3RWML2B9SG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -511,7 +523,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "zero2hero.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppleADay.app/AppleADay";
 			};
 			name = Debug;
@@ -520,6 +532,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 3RWML2B9SG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -528,7 +541,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "zero2hero.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppleADay.app/AppleADay";
 			};
 			name = Release;
