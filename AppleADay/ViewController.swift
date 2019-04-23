@@ -49,6 +49,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             saveMultiVitaminMuscleTech()
         case "weiderProtein":
             saveWeiderProtein()
+        case "black_cumin_oil":
+            saveBlackCuminOil()
 
         case "hand-stand":
             saveHandStand()
@@ -325,6 +327,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+
+    func saveBlackCuminOil() -> Void {
+        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
+        let amount = 0.05 // 5 grams
+        
+        samplesList[.dietaryEnergyConsumed] = [345.0 * amount, "kcal"]
+        samplesList[.dietaryFatTotal] = [15.0 * amount, "g"]
+        samplesList[.dietaryFatSaturated] = [0.5 * amount, "g"]
+        samplesList[.dietaryFatPolyunsaturated] = [1.7 * amount, "g"]
+        samplesList[.dietaryFatMonounsaturated] = [10.0 * amount, "g"]
+        samplesList[.dietarySodium] = [88.0 * amount, "mg"]
+        samplesList[.dietaryPotassium] = [1.694 * amount, "mg"]
+        samplesList[.dietaryCarbohydrates] = [52.0 * amount, "g"]
+        samplesList[.dietaryFiber] = [40.0 * amount, "g"]
+        samplesList[.dietaryProtein] = [16.0 * amount, "g"]
+        samplesList[.dietaryVitaminA] = [135.0 * 0.3 * amount, "mcg"]
+        samplesList[.dietaryVitaminB6] = [0.5 * amount, "mg"]
+        samplesList[.dietaryVitaminC] = [21.0 * amount, "mg"]
+        samplesList[.dietaryIron] = [18.5 * amount, "mg"]
+        samplesList[.dietaryCalcium] = [1.196 * amount, "mg"]
+        samplesList[.dietaryMagnesium] = [385 * amount, "mg"]
+
+        saveFoodSample(samplesList, 60, "Black cumin oil")
+    }
     
     func saveHandStand() -> Void {
         let duration = 30 //seconds
