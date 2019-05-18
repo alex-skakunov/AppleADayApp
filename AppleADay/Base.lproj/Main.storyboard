@@ -268,10 +268,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mX-GW-E6R">
-                                <rect key="frame" x="172" y="140" width="75" height="76"/>
+                                <rect key="frame" x="172" y="137" width="78" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="black_cumin_oil" image="black_cumin_oil.jpg"/>
+                                <state key="normal" title="black_cumin_oil" image="black-cumin-oil.jpeg"/>
                                 <connections>
                                     <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N2h-Tv-vBy"/>
                                 </connections>
@@ -290,7 +290,7 @@
     </scenes>
     <resources>
         <image name="apple.jpg" width="200" height="195"/>
-        <image name="black_cumin_oil.jpg" width="100" height="100"/>
+        <image name="black-cumin-oil.jpeg" width="53" height="80"/>
         <image name="circle.png" width="50" height="50"/>
         <image name="coffee.jpg" width="48" height="31.440000534057617"/>
         <image name="granat.jpg" width="1800" height="1224"/>

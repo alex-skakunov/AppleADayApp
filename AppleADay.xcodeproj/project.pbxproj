@@ -32,6 +32,7 @@
 		2C8F40411E1546CE003E9964 /* AppleADayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F40401E1546CE003E9964 /* AppleADayTests.swift */; };
 		C40A859D226F5E2500EBCAC4 /* black_cumin_oil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C40A859C226F5E2400EBCAC4 /* black_cumin_oil.jpg */; };
 		C40B3A7A223BA09500475DF6 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40B3A79223BA09500475DF6 /* HealthKit.framework */; };
+		C420FAD72290524D00A52D04 /* black-cumin-oil.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C420FAD62290524D00A52D04 /* black-cumin-oil.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		C40A859C226F5E2400EBCAC4 /* black_cumin_oil.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = black_cumin_oil.jpg; path = assets/black_cumin_oil.jpg; sourceTree = SOURCE_ROOT; };
 		C40B3A78223BA09500475DF6 /* AppleADay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleADay.entitlements; sourceTree = "<group>"; };
 		C40B3A79223BA09500475DF6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		C420FAD62290524D00A52D04 /* black-cumin-oil.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "black-cumin-oil.jpeg"; path = "assets/black-cumin-oil.jpeg"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				11F6DD1B1FC827FA00E6CE75 /* design */,
 				11F6DD0A1FC827CC00E6CE75 /* activity-icons */,
 				114B78891FA4E1590086BF81 /* apple.jpg */,
+				C420FAD62290524D00A52D04 /* black-cumin-oil.jpeg */,
 				114B78881FA4E1590086BF81 /* coffee.jpg */,
 				114B78871FA4E1580086BF81 /* granat.jpg */,
 				1129EBDE1FC30B01007B5408 /* multi-vitamin.jpg */,
@@ -304,6 +307,7 @@
 				114B78861FA4DE0D0086BF81 /* mug.jpg in Resources */,
 				114B788A1FA4E1590086BF81 /* granat.jpg in Resources */,
 				2C8F40351E1546CE003E9964 /* LaunchScreen.xib in Resources */,
+				C420FAD72290524D00A52D04 /* black-cumin-oil.jpeg in Resources */,
 				11F6DD141FC827E300E6CE75 /* stairs-climbing.png in Resources */,
 				1129EBE11FC31089007B5408 /* weider-protein-80-plus.jpg in Resources */,
 				11F6DD191FC827E300E6CE75 /* press.png in Resources */,
