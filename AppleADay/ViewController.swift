@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //MARK: Properties
     
     @IBOutlet weak var stairsClimbingLabel: UILabel!
+    @IBOutlet weak var sexLabel: UILabel!
     
     let healthStore = HKHealthStore()
     
@@ -73,7 +74,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             savePill() //"Супрадин"
         }
         
-        if (sender.currentTitle! != "stairs-climbing") {
+        if (sender.currentTitle! != "stairs-climbing" && sender.currentTitle! != "sex") {
             Alert(title: "Success",
               message: "The " + sender.currentTitle! + " was recorded in Apple Health",
               buttonText: "OK");
@@ -539,17 +540,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveSex() -> Void {
-        let duration = 600 //seconds
+        if (nil == timersList["sex"]) {
+            timersList["sex"] = Date()
+            sexLabel.text = "ON"
+            return
+        }
+
+        sexLabel.text = ""
+        let startDate = timersList["sex"]
+        timersList["sex"] = nil
+        let endDate = Date()
+
         let sexualActivity = HKCategoryType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sexualActivity)
         let metadata: [String: String]? = [HKMetadataKeySexualActivityProtectionUsed: "NO"]
-
-        let endTime = NSDate()
         
         let sexSample = HKCategorySample(
             type: sexualActivity!,
             value: HKCategoryValue.notApplicable.rawValue,
-            start: endTime.addingTimeInterval(TimeInterval(-duration)) as Date,
-            end: endTime as Date,
+            start: startDate!,
+            end: endDate,
             metadata: metadata
         )
 
@@ -558,10 +567,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print(error ?? "error!")
             }
         })
-
-        var samplesList =  [HKQuantityTypeIdentifier: Array<Any>]()
-        samplesList[.activeEnergyBurned] = [42.0, "kcal"]
-        processData(samplesList, "Sex")
+        
+        Alert(title: "Success",
+              message: "A sex was recorded in Apple Health",
+              buttonText: "OK");
 
     }
     
@@ -731,10 +740,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
                 var metadata: [String: Any] = [HKMetadataKeyIndoorWorkout: true]
             
-                if #available(iOS 11.2, *) {
-                    let elevation = HKQuantity(unit: HKUnit.meter(), doubleValue: 3.0 * Double(floorsCount))
-                    metadata[HKMetadataKeyElevationAscended] = elevation
-                }
+                let elevation = HKQuantity(unit: HKUnit.meter(), doubleValue: 3.0 * Double(floorsCount))
+                metadata[HKMetadataKeyElevationAscended] = elevation
             
                 self.saveContinuousWorkout(type: .stairs, startDate: startDate!, endDate: endDate, title: "Stairs", samplesList: samplesList, metadata)
         }
