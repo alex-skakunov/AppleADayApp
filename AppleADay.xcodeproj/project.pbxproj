@@ -33,6 +33,7 @@
 		C40A859D226F5E2500EBCAC4 /* black_cumin_oil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C40A859C226F5E2400EBCAC4 /* black_cumin_oil.jpg */; };
 		C40B3A7A223BA09500475DF6 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40B3A79223BA09500475DF6 /* HealthKit.framework */; };
 		C420FAD72290524D00A52D04 /* black-cumin-oil.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C420FAD62290524D00A52D04 /* black-cumin-oil.jpeg */; };
+		C49836C0230C0E0C0049F4E5 /* meditation.png in Resources */ = {isa = PBXBuildFile; fileRef = C49836BF230C0E0B0049F4E5 /* meditation.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		C40B3A78223BA09500475DF6 /* AppleADay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleADay.entitlements; sourceTree = "<group>"; };
 		C40B3A79223BA09500475DF6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		C420FAD62290524D00A52D04 /* black-cumin-oil.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "black-cumin-oil.jpeg"; path = "assets/black-cumin-oil.jpeg"; sourceTree = SOURCE_ROOT; };
+		C49836BF230C0E0B0049F4E5 /* meditation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meditation.png; path = assets/meditation.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 				114B78891FA4E1590086BF81 /* apple.jpg */,
 				C420FAD62290524D00A52D04 /* black-cumin-oil.jpeg */,
 				114B78881FA4E1590086BF81 /* coffee.jpg */,
+				C49836BF230C0E0B0049F4E5 /* meditation.png */,
 				114B78871FA4E1580086BF81 /* granat.jpg */,
 				1129EBDE1FC30B01007B5408 /* multi-vitamin.jpg */,
 				1129EBE01FC31088007B5408 /* weider-protein-80-plus.jpg */,
@@ -256,6 +259,9 @@
 							com.apple.HealthKit = {
 								enabled = 1;
 							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
 						};
 					};
 					2C8F40391E1546CE003E9964 = {
@@ -298,6 +304,7 @@
 				114B788C1FA4E1590086BF81 /* apple.jpg in Resources */,
 				11F6DD131FC827E300E6CE75 /* sex.png in Resources */,
 				114B78841FA4D78A0086BF81 /* Images.xcassets in Resources */,
+				C49836C0230C0E0C0049F4E5 /* meditation.png in Resources */,
 				11F6DD1D1FC827FA00E6CE75 /* circle.png in Resources */,
 				1129EBDF1FC30B02007B5408 /* multi-vitamin.jpg in Resources */,
 				C40A859D226F5E2500EBCAC4 /* black_cumin_oil.jpg in Resources */,

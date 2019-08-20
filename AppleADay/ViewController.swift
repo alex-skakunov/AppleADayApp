@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var stairsClimbingLabel: UILabel!
     @IBOutlet weak var sexLabel: UILabel!
+    @IBOutlet weak var MeditationLabel: UILabel!
     
     let healthStore = HKHealthStore()
     
@@ -53,8 +54,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case "black_cumin_oil":
             saveBlackCuminOil()
 
-        case "hand-stand":
-            saveHandStand()
+//        case "hand-stand":
+//            saveHandStand()
+        case "meditation":
+            saveMeditation()
         case "press":
             savePress()
         case "push-ups":
@@ -74,7 +77,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             savePill() //"Супрадин"
         }
         
-        if (sender.currentTitle! != "stairs-climbing" && sender.currentTitle! != "sex") {
+        if (sender.currentTitle! != "stairs-climbing" && sender.currentTitle! != "sex" && sender.currentTitle! != "meditation") {
             Alert(title: "Success",
               message: "The " + sender.currentTitle! + " was recorded in Apple Health",
               buttonText: "OK");
@@ -86,6 +89,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let healthDataToWrite = Set(arrayLiteral:
             
             HKCategoryType.categoryType(forIdentifier: .sexualActivity)!,
+            HKCategoryType.categoryType(forIdentifier: .mindfulSession)!,
 
             HKObjectType.workoutType(),
             
@@ -539,18 +543,50 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func saveMeditation() -> Void {
+        if (nil == timersList["meditation"]) {
+            timersList["meditation"] = Date()
+            MeditationLabel.text = "ON"
+            return
+        }
+        
+        MeditationLabel.text = ""
+        let startDate = timersList["meditation"]
+        timersList["meditation"] = nil
+        let endDate = Date()
+        
+        let meditationActivity = HKCategoryType.categoryType(forIdentifier: HKCategoryTypeIdentifier.mindfulSession)
+
+        let sample = HKCategorySample(
+            type: meditationActivity!,
+            value: HKCategoryValue.notApplicable.rawValue,
+            start: startDate!,
+            end: endDate
+        )
+        
+        healthStore.save(sample, withCompletion: { (success, error) -> Void in
+            if( error != nil ) {
+                print(error ?? "error!")
+            }
+        })
+        
+        Alert(title: "Success",
+              message: "A meditation was recorded in Apple Health",
+              buttonText: "OK");
+    }
+    
     func saveSex() -> Void {
         if (nil == timersList["sex"]) {
             timersList["sex"] = Date()
             sexLabel.text = "ON"
             return
         }
-
+        
         sexLabel.text = ""
         let startDate = timersList["sex"]
         timersList["sex"] = nil
         let endDate = Date()
-
+        
         let sexualActivity = HKCategoryType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sexualActivity)
         let metadata: [String: String]? = [HKMetadataKeySexualActivityProtectionUsed: "NO"]
         
@@ -561,7 +597,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             end: endDate,
             metadata: metadata
         )
-
+        
         healthStore.save(sexSample, withCompletion: { (success, error) -> Void in
             if( error != nil ) {
                 print(error ?? "error!")
@@ -571,7 +607,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         Alert(title: "Success",
               message: "A sex was recorded in Apple Health",
               buttonText: "OK");
-
     }
     
     func saveSitUps() -> Void {
