@@ -9,6 +9,7 @@
 
 import UIKit
 import HealthKit
+import AudioToolbox.AudioServices
 
 @available(iOS 10.0, *)
 class ViewController: UIViewController, UITextFieldDelegate {
@@ -21,6 +22,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let healthStore = HKHealthStore()
     
     var timersList = [String: Date]()
+    var timers2List = [String: Timer]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -543,13 +545,51 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func timeToStr(time: TimeInterval) -> String {
+//        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        
+        var times: [String] = []
+//        if hours > 0 {
+//            times.append("\(hours)")
+//        }
+//        if minutes > 0 {
+//            times.append("\(minutes)")
+//        }
+        times.append(String(format: "%02d", minutes))
+        times.append(String(format: "%02d", seconds))
+            
+        return times.joined(separator: ":")
+    }
+    
+    @objc func fire()
+    {
+        let time = Date().timeIntervalSince(timersList["meditation"]!)
+        MeditationLabel.text = timeToStr(time: time)
+        
+        // on 7 minutes it beeps
+        if (Int(time) == 7*60) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        }
+    }
+    
     func saveMeditation() -> Void {
         if (nil == timersList["meditation"]) {
             timersList["meditation"] = Date()
-            MeditationLabel.text = "ON"
+            let timer = Timer(timeInterval: 1.0,
+                              target: self,
+                              selector: #selector(fire),
+                              userInfo: nil,
+                              repeats: true)
+            RunLoop.current.add(timer, forMode: RunLoop.Mode.commonModes)
+            timer.tolerance = 0.1
+            timers2List["meditation"] = timer
+            MeditationLabel.text = "00:00"
             return
         }
         
+        timers2List["meditation"]?.invalidate()
         MeditationLabel.text = ""
         let startDate = timersList["meditation"]
         timersList["meditation"] = nil
